@@ -1,0 +1,312 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body modal-details text-start">
+      <h3 class="titulo text-center">
+        Detalle envío
+      </h3>
+      <div class="row">
+        <div class="col-12" *ngIf="!loading">
+          <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+            <mat-tab label="Información">
+              <div class="row info" *ngIf="objectDetails.datas">
+                <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-12 text-center">
+                    <strong> {{ objectDetails.guide }} </strong><label class="mb-3"> Número Guía </label>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 text-center">
+                    <strong> {{ objectDetails.track }} </strong><label class="mb-3"> Número Rastreo </label>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-12 d-flex align-items-center p-5">
+                    <img [src]="objectDetails.datas.courier.image" alt="Mensajería" class="w-100">
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-12">
+                    <strong> {{ objectDetails.datas.courier.courier }} </strong><label class="mb-3"> Mensajería </label>
+                    <strong> {{ objectDetails.datas.service.service }} </strong><label class="mb-3"> Producto </label>
+                    <strong> {{ objectDetails.datas.service.service_type }} </strong><label class="mb-3"> Tipo de producto </label>
+                    <strong> {{ objectDetails.datas.profile.profile }} </strong><label class="mb-3"> Perfil </label>
+                    <strong> {{ objectDetails.datas.type_price.price_type }} </strong><label class="mb-3"> Tipo de precio </label>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-12">
+                    <strong> {{ objectDetails.customer.business_name }} </strong><label class="mb-3"> Cliente </label>
+                    <strong> {{ objectDetails.datas.profile.profile }} </strong><label class="mb-3"> Perfil </label>
+                    <strong> {{ objectDetails.user.username }} </strong><label class="mb-3"> Ejecutivo </label>
+                    <strong> {{ objectDetails.dates.generation_start }} </strong><label class="mb-3"> Fecha generada </label>
+                    <strong> {{ objectDetails.dates.delivery_date }} </strong><label class="mb-3"> Fecha entrega </label>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-12">
+                    <h4 class="text-start">Datos origen</h4>
+                    <strong> {{ objectDetails.origin.postal_code }} </strong><label class="mb-3"> Código postal </label>
+                    <strong> {{ objectDetails.origin.state }} </strong><label class="mb-3"> Estado </label>
+                    <strong> {{ objectDetails.origin.city }} </strong><label class="mb-3"> Ciudad </label>
+                    <strong> {{ objectDetails.origin.municipality }} </strong><label class="mb-3"> Municipio </label>
+                    <strong> {{ objectDetails.origin.settlement }} </strong><label class="mb-3"> Colonia </label>
+                    <strong> {{ objectDetails.origin.branch_office }} </strong><label class="mb-3"> Identificador </label>
+                    <strong> {{ objectDetails.origin.business }} </strong><label class="mb-3"> Empresa </label>
+                    <strong> {{ objectDetails.origin.contact }} </strong><label class="mb-3"> Contacto </label>
+                    <strong> {{ objectDetails.origin.stall }} </strong><label class="mb-3"> Puesto </label>
+                    <strong> {{ objectDetails.origin.phone }} </strong><label class="mb-3"> Teléfono </label>
+                    <strong> {{ objectDetails.origin.email }} </strong><label class="mb-3"> Correo electronico </label>
+                    <strong> {{ objectDetails.origin.rfc }} </strong><label class="mb-3"> R.F.C. </label>
+                    <strong> {{ objectDetails.origin.street }} </strong><label class="mb-3"> Calle </label>
+                    <strong> {{ objectDetails.origin.interior_number }} | {{ objectDetails.origin.outdoor_number }} </strong><label class="mb-3"> Num. Interior | Num. Exterior </label>
+                    <strong> {{ objectDetails.origin.suburb }} </strong><label class="mb-3"> Suburvio </label>
+                    <strong> {{ objectDetails.origin.location }} </strong><label class="mb-3"> Ubicación </label>
+                    <strong> {{ objectDetails.origin.reference }} </strong><label class="mb-3"> Referencía </label>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-12">
+                    <h4 class="text-start">Datos destino</h4>
+                    <strong> {{ objectDetails.destin.postal_code }} </strong><label class="mb-3"> Código postal </label>
+                    <strong> {{ objectDetails.destin.state }} </strong><label class="mb-3"> Estado </label>
+                    <strong> {{ objectDetails.destin.city }} </strong><label class="mb-3"> Ciudad </label>
+                    <strong> {{ objectDetails.destin.municipality }} </strong><label class="mb-3"> Municipio </label>
+                    <strong> {{ objectDetails.destin.settlement }} </strong><label class="mb-3"> Colonia </label>
+                    <strong> {{ objectDetails.destin.branch_office }} </strong><label class="mb-3"> Identificador </label>
+                    <strong> {{ objectDetails.destin.business }} </strong><label class="mb-3"> Empresa </label>
+                    <strong> {{ objectDetails.destin.contact }} </strong><label class="mb-3"> Contacto </label>
+                    <strong> {{ objectDetails.destin.stall }} </strong><label class="mb-3"> Puesto </label>
+                    <strong> {{ objectDetails.destin.phone }} </strong><label class="mb-3"> Teléfono </label>
+                    <strong> {{ objectDetails.destin.email }} </strong><label class="mb-3"> Correo electronico </label>
+                    <strong> {{ objectDetails.destin.rfc }} </strong><label class="mb-3"> R.F.C. </label>
+                    <strong> {{ objectDetails.destin.street }} </strong><label class="mb-3"> Calle </label>
+                    <strong> {{ objectDetails.destin.interior_number }} | {{ objectDetails.destin.outdoor_number }} </strong><label class="mb-3"> Num. Interior | Num. Exterior </label>
+                    <strong> {{ objectDetails.destin.suburb }} </strong><label class="mb-3"> Suburvio </label>
+                    <strong> {{ objectDetails.destin.location }} </strong><label class="mb-3"> Ubicación </label>
+                    <strong> {{ objectDetails.destin.reference }} </strong><label class="mb-3"> Referencía </label>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-12">
+                    <strong> {{ objectDetails.statuse?.state }} </strong><label class="mb-3"> Estado Envío </label>
+                    <strong> {{ objectDetails.status }} </strong><label class="mb-3"> Estado interno </label>
+                    <strong> {{ objectDetails.type }} </strong><label class="mb-3"> Tipo </label>
+                    <strong> {{ objectDetails.ship_type }} </strong><label class="mb-3"> Realizado </label>
+                    <strong> {{ objectDetails.created_at }} </strong><label class="mb-3"> Creado </label>
+                    <strong> {{ objectDetails.updated_at }} </strong><label class="mb-3"> Actualizado </label>
+                    <!-- Buttons -->
+                    <button class="btn btn-info mb-3 text-center" title="Descargar PDF" *ngIf="!disabledBtnPdf" (click)="downloadQuotePdf(objectDetails.id, objectDetails.customer.slug + '.pdf')"> Descargar PDF </button>
+                    <button class="btn btn-info mb-3 text-center" *ngIf="disabledBtnPdf" disabled> Descargar PDF </button>
+                    <br>
+                    <button class="btn btn-success mb-3 text-center" title="Descargar Guía" *ngIf="!disabledBtnGuide" (click)="downloadGuidePdf(objectDetails.id, objectDetails.guide + '.pdf')"> Descargar Guía </button>
+                    <button class="btn btn-success mb-3 text-center" *ngIf="disabledBtnGuide" disabled> Descargar Guía </button>
+                    <br>
+                    <button class="btn btn-danger mb-3 text-center" title="Cancelar Guía" *ngIf="!canceldBtnGuide" (click)="cancelGuide(objectDetails.id)"> Cancelar Guía </button>
+                    <button class="btn btn-danger mb-3 text-center" *ngIf="canceldBtnGuide" disabled> Cancelar Guía </button>
+                    <br>
+                    <a class="btn btn-warning mb-3 text-center" title="Ver Guia" [href]="urlEndPoint + '/view/shipment/show-guide/' + objectDetails.id" target="_blank"> Ver Guia </a>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="Paquetes">
+              <div *ngIf="dataForPackages">
+                <div class="logistify-table" *ngIf="dataForPackages.data.length > 0">
+                  <table mat-table matSort class="w-100" [dataSource]="dataForPackages">
+                    <ng-container matColumnDef="type">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+                      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="long">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Largo </th>
+                      <td mat-cell *matCellDef="let element"> {{element.long}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="width">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Ancho </th>
+                      <td mat-cell *matCellDef="let element"> {{element.width}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="high">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Alto </th>
+                      <td mat-cell *matCellDef="let element"> {{element.high}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="weight">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Peso </th>
+                      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="quantity">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+                      <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="campaign">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Campaña </th>
+                      <td mat-cell *matCellDef="let element"> {{element.campaign}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="cost_center">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> C.c. </th>
+                      <td mat-cell *matCellDef="let element"> {{element.cost_center}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="content">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Contenido </th>
+                      <td mat-cell *matCellDef="let element"> {{element.content}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columnsPackages"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columnsPackages;"></tr>
+                  </table>
+                  <mat-paginator
+                    showFirstLastButtons
+                    color="warn"
+                    [length]="dataForPackages.data.length"
+                    [pageSize]="itemPerPage"
+                    [pageSizeOptions]="pageSizeOptions">
+                  </mat-paginator>
+                </div>
+                <strong class="p-2 d-block text-center" *ngIf="dataForPackages.data.length === 0"> {{ messageEmpty }} </strong>
+              </div>
+            </mat-tab>
+            <mat-tab label="Precios">
+              <div *ngIf="objectDetails.numbers">
+                <div class="row info" *ngIf="objectDetails.numbers.total">
+                  <div class="col-12 col-md-4 col-sm-12" *ngIf="objectDetails.numbers">
+                    <strong> {{ objectDetails.numbers.additional_days }} </strong><label class="mb-3"> Días adicionales </label>
+                    <strong> {{ objectDetails.numbers.pieces }} </strong><label class="mb-3"> Piezas </label>
+                    <strong> {{ objectDetails.numbers.weight }} kg</strong><label class="mb-3"> Peso </label>
+                    <strong> {{ objectDetails.numbers.value_declared.toFixed(2) }} </strong><label class="mb-3"> Valor declarado </label>
+                  </div>
+                  <div class="col-12 col-md-4 col-sm-12" *ngIf="objectDetails.numbers">
+                    <strong> ${{ objectDetails.numbers.charges_add.toFixed(2) }} </strong><label class="mb-3"> Cargos adicionales </label>
+                    <strong> ${{ objectDetails.numbers.freight.toFixed(2) }} </strong><label class="mb-3"> Transporte </label>
+                    <strong> ${{ objectDetails.numbers.fuel.toFixed(2) }} </strong><label class="mb-3"> Combustible </label>
+                    <strong> ${{ objectDetails.numbers.secure.toFixed(2) }} </strong><label class="mb-3"> Seguro </label>
+                  </div>
+                  <div class="col-12 col-md-4 col-sm-12" *ngIf="objectDetails.numbers">
+                    <strong> ${{ objectDetails.numbers.subtotal.toFixed(2) }}</strong><label class="mb-3"> Subtotal </label>
+                    <strong> ${{ objectDetails.numbers.iva.toFixed(2) }}</strong><label class="mb-3"> IVA </label>
+                    <strong> ${{ objectDetails.numbers.total.toFixed(2) }}</strong><label class="mb-3"> Total </label>
+                  </div>
+                </div>
+                <strong class="p-2 d-block text-center" *ngIf="!objectDetails.numbers?.total">
+                  Este envío no encontro un precio en su información, por lo que se debe de verifcar dicho envío
+                </strong>
+              </div>
+            </mat-tab>
+            <mat-tab label="Eventos" *ngIf="dataForEvents && dataForEvents.data.length > 0">
+              <div class="logistify-table" *ngIf="dataForEvents.data.length > 0">
+                <table mat-table matSort class="w-100" [dataSource]="dataForEvents">
+                  <ng-container matColumnDef="event">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Evento </th>
+                    <td mat-cell *matCellDef="let element"> {{element.event}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="event_shipment">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción</th>
+                    <td mat-cell *matCellDef="let element"> {{element.pivot.description}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                    <td mat-cell *matCellDef="let element"> {{element.pivot.event_date}} </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="columnsEvents"></tr>
+                  <tr mat-row *matRowDef="let row; columns: columnsEvents;"></tr>
+                </table>
+                <mat-paginator
+                  showFirstLastButtons
+                  color="warn"
+                  [length]="dataForEvents.data.length"
+                  [pageSize]="itemPerPage"
+                  [pageSizeOptions]="pageSizeOptions">
+                </mat-paginator>
+              </div>
+              <strong class="p-2 d-block text-center" *ngIf="dataForEvents.data.length === 0"> {{ messageEmpty }} </strong>
+            </mat-tab>
+            <mat-tab label="Incidencias" *ngIf="dataForIncidences && dataForIncidences.data.length > 0">
+              <div class="logistify-table" *ngIf="dataForIncidences.data.length > 0">
+                <table mat-table matSort class="w-100" [dataSource]="dataForIncidences">
+                  <ng-container matColumnDef="incidence">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Incidencia </th>
+                    <td mat-cell *matCellDef="let element"> {{element.incidence}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="incidence_shipment">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
+                    <td mat-cell *matCellDef="let element"> {{element.pivot.description}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="created">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Creado </th>
+                    <td mat-cell *matCellDef="let element"> {{element.pivot.created_at}} </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="columnsIncidences"></tr>
+                  <tr mat-row *matRowDef="let row; columns: columnsIncidences;"></tr>
+                </table>
+                <mat-paginator
+                  showFirstLastButtons
+                  color="warn"
+                  [length]="dataForIncidences.data.length"
+                  [pageSize]="itemPerPage"
+                  [pageSizeOptions]="pageSizeOptions">
+                </mat-paginator>
+              </div>
+              <strong class="p-2 d-block text-center" *ngIf="dataForIncidences.data.length === 0"> {{ messageEmpty }} </strong>
+            </mat-tab>
+            <mat-tab label="Cargos Adicionales" *ngIf="dataForChargesAdd && dataForChargesAdd.data.length > 0">
+              <div *ngIf="dataForChargesAdd">
+                <div class="logistify-table table-delete-false" *ngIf="dataForChargesAdd.data.length > 0">
+                  <table mat-table matSort class="w-100 text-start" [dataSource]="dataForChargesAdd">
+                    <ng-container matColumnDef="service">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cargo </th>
+                      <td mat-cell *matCellDef="let element"> {{element.service}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="price">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
+                      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="by_search">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Buscado por </th>
+                      <td mat-cell *matCellDef="let element"> {{element.find_by}} </td>
+                    </ng-container>
+                   
+                    <tr mat-header-row *matHeaderRowDef="columsChargesAdd"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columsChargesAdd;"></tr>
+                  </table>
+                  <mat-paginator
+                    showFirstLastButtons
+                    color="warn"
+                    [length]="dataForChargesAdd.data.length"
+                    [pageSize]="itemPerPage"
+                    [pageSizeOptions]="pageSizeOptions">
+                  </mat-paginator>
+                </div>
+                <strong class="p-2 d-block text-center" *ngIf="dataForChargesAdd.data.length === 0">{{ messageEmpty }}</strong>
+              </div>
+            </mat-tab>
+            <mat-tab label="Servicios Adicionales" *ngIf="dataForServicesAdd && dataForServicesAdd.data.length > 0">
+              <div *ngIf="dataForServicesAdd">
+                <div class="logistify-table table-delete-false" *ngIf="dataForServicesAdd.data.length > 0">
+                  <table mat-table matSort class="w-100 text-start" [dataSource]="dataForServicesAdd">
+                    <ng-container matColumnDef="service">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Servicio </th>
+                      <td mat-cell *matCellDef="let element"> {{element.service}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="price">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
+                      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="by_search">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Buscado por </th>
+                      <td mat-cell *matCellDef="let element"> {{element.find_by}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columsServicesAdd"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columsServicesAdd"></tr>
+                  </table>
+                  <mat-paginator
+                    showFirstLastButtons
+                    color="warn"
+                    [length]="dataForServicesAdd.data.length"
+                    [pageSize]="itemPerPage"
+                    [pageSizeOptions]="pageSizeOptions">
+                  </mat-paginator>
+                </div>
+                <strong class="p-2 d-block text-center" *ngIf="dataForServicesAdd.data.length === 0"> {{ messageEmpty }} </strong>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+        <div class="loading d-flex justify-content-center" *ngIf="loading">
+          <img width="30%" src="assets/img/loader.svg">
+        </div>
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cerrar
+    </button>
+  </div>
+</div>

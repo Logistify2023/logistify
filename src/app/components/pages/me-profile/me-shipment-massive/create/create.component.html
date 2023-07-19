@@ -1,0 +1,136 @@
+<div class="modal-general">
+    <div class="modal-content modal-dialog">
+      <mat-dialog-content class="mat-typography modal-body">
+        <h3 class="titulo"> Nueva cotización masiva </h3>
+        <div class="form form-step">
+          <div class="pasos current" data-step="step-1">
+            <mat-stepper [linear]="true" #stepper>
+              <mat-step [stepControl]="formGroup" label="Datos para cotizar">
+                <form [formGroup]="formGroup">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Cliente</mat-label>
+                          <mat-select formControlName="id_customer" [(ngModel)]="customer_id" (selectionChange)="chageClientSelected()">
+                            <mat-option *ngFor="let item of listCustomers" [value]="item.id">
+                              {{ item.business_name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Productos</mat-label>
+                          <mat-select formControlName="products" multiple>
+                            <mat-option *ngFor="let item of listServicesClient" [value]="item.service_id">
+                              {{ item.service.service }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <h4 class="text-start">¿Que quieres enviar?</h4>
+                      <div class="col">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Cantidad de Paquetes</mat-label>
+                          <input matInput type="number" formControlName="package_quantity" min="0" [(ngModel)]="num_packages">
+                        </mat-form-field>
+                      </div>
+                      <div class="col">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Cantidad de sobres</mat-label>
+                          <input matInput type="number" formControlName="envelope_quantity" min="0" [(ngModel)]="num_envelopes">
+                      </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <h4 class="text-start">¿Son multipieza?</h4>
+                      <div class="col-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Cantidad de Paquetes</mat-label>
+                          <input matInput type="number" formControlName="package_multipece_quantity" min="0"  [(ngModel)]="multipieza">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col">
+                        <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages"
+                          [innerHTML]="errorMessages"></small>
+                      </div>
+                    </div>
+                    <div class="controls">
+                      <button  mat-raised-button matTooltip="Generar plantilla de excel" (click)="export()" *ngIf="!downloadTemplate">
+                        Generar plantilla
+                      </button>
+                      <mat-stepper [linear]="" #stepper *ngIf="downloadTemplate">
+                        <mat-step [stepControl]="formGroup">
+                          <mat-card class="mb-3">
+                            <mat-card-content>
+                              <a  class="btn-link mb-3" target="_blank"
+                                  [href]="urlEndPoint + '/export/massive-quote?' + 'customer_id=' + customer_id + '&num_packages=' + num_packages + '&num_envelopes=' +  num_envelopes + '&multipieza=' + multipieza"
+                              >
+                                 Descargar plantilla
+                              </a>
+                              <!-- Simple card -->
+                            </mat-card-content>
+                          </mat-card>
+                          <div>
+                            <button mat-raised-button matStepperNext>Siguiente</button>
+                          </div>
+                        </mat-step>
+                        <mat-step [stepControl]="formGroup">
+                          <form [formGroup]="formGroup">
+                            <mat-card class="mb-3">
+                              <mat-card-content>
+                                <div class="row">
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label for="importAdditionalFile"
+                                      class="col-10 mat-focus-indicator mat-stroked-button mat-button-base">Importar plantilla
+                                    </label>
+                                    <input type="file" id="importAdditionalFile" (change)="importAdditional($event)"
+                                      accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                      style="opacity: 0;"
+                                      >
+                                    </div>
+                                  </div>
+                                  <div class="col">
+                                    <span class="" *ngIf="fileData">{{fileData.name}}</span>
+                                  </div>
+                                </div>
+                              </mat-card-content>
+                            </mat-card>
+                            <div>
+                              <button mat-raised-button matStepperPrevious>Atrás</button>
+                              <button mat-raised-button matStepperNext>Siguiente</button>
+                            </div>
+                          </form>
+                        </mat-step>
+                        <mat-step>
+                          <mat-card class="mb-3">
+                            <mat-card-content>
+                              <button  mat-raised-button class="btn btn-secondary" *ngIf="uploadFile" (click)="onSubmit()">Cotizar</button>
+                              <p *ngIf="!uploadFile">
+                                <button mat-raised-button matStepperPrevious><mat-icon fontIcon="arrow_back"></mat-icon></button>
+                                Sube tu plantilla de cotizaciones
+                              </p>
+                            </mat-card-content>
+                          </mat-card>
+                        </mat-step>
+                      </mat-stepper>
+                    </div>
+                  </div>
+                </form>
+              </mat-step>
+            </mat-stepper>
+          </div>
+        </div>
+      </mat-dialog-content>
+      <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+        Cancelar
+      </button>
+    </div>
+  </div>
+  

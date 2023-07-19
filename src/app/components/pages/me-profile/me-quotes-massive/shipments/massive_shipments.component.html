@@ -1,0 +1,113 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body modal-details text-start">
+      <h3 class="titulo text-center">
+        Detalle cotización masiva
+      </h3>
+      <div class="row">
+        <div class="col-12" *ngIf="!loading">
+          <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+            <mat-tab label="Cotización masiva">
+              <div class="row info" *ngIf="objectMassive">
+                <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                    <strong> {{ objectMassive.customer?.business_name }} </strong><label class="mb-3"> Para el cliente </label>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                    <strong> {{ objectMassive.user?.username }} </strong><label class="mb-3"> Hecho por </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                    <strong> {{ objectMassive.start }} </strong><label class="mb-3"> Fecha Inicio </label>
+                    <strong> {{ objectMassive.rows }} </strong><label class="mb-3"> Num. Destinos </label>
+                    <strong> {{ objectMassive.products }} </strong><label class="mb-3"> Num. Productos </label>
+                    <strong> {{ objectMassive.transactions }} </strong><label class="mb-3"> Num. Transacciones </label>
+                    <strong> {{ objectMassive.progress }}% </strong><label class="mb-3"> Progreso </label>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                    <strong> {{ objectMassive.status }} </strong><label class="mb-3"> Estado </label>
+                    <strong> {{ objectMassive.difference }} </strong><label class="mb-3"> Procesado en </label>
+                    <strong> {{ objectMassive.type }} </strong><label class="mb-3"> Tipo </label>
+                    <strong> {{ objectMassive.created_at }} </strong><label class="mb-3"> Creado </label>
+                    <strong> {{ objectMassive.updated_at }} </strong><label class="mb-3"> Actualizado </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                    <button class="btn btn-warning mb-3" *ngIf="!disabledBtnCancel" (click)="cancelQuoteMassive(objectMassive.id)"> Cancelar masivo </button>
+                    <button class="btn btn-warning mb-3 text-center" *ngIf="disabledBtnCancel" disabled> Cancelar masivo </button>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                    <button class="btn btn-danger mb-3" *ngIf="!disabledBtnDelete" (click)="deleteQuoteMassive(objectMassive.id)"> Eliminar masivo </button>
+                    <button class="btn btn-danger mb-3 text-center" *ngIf="disabledBtnDelete" disabled> Eliminar masivo </button>
+                  </div>
+                </div>
+                <strong class="p-2 d-block text-center" *ngIf="objectMassive.length === 0"> {{ messageEmpty }} </strong>
+              </div>
+            </mat-tab>
+            <mat-tab label="Listado cotizaciones">
+              <div *ngIf="objectShipments.data">
+                <div class="row mb-3">
+                  <div class="col-lg-12 col-md-12 col-sm-12 form">
+                    <div class="input-group">
+                        <mat-form-field appearance="outline">
+                        <mat-label>Buscar</mat-label>
+                        <input matInput (keyup)="applyFilter($event)">
+                        <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="logistify-table" *ngIf="totalResult > 0">
+                  <table mat-table matSort class="w-100" [dataSource]="objectShipments">
+                    <ng-container matColumnDef="producto">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Producto </th>
+                      <td mat-cell *matCellDef="let element"> {{ element.producto }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="origen">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Origen </th>
+                      <td mat-cell *matCellDef="let element"> {{ element.origen }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="destino">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Destino </th>
+                      <td mat-cell *matCellDef="let element"> {{ element.destino }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="piezas">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Piezas </th>
+                      <td mat-cell *matCellDef="let element"> {{ element.piezas }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="peso">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Peso </th>
+                      <td mat-cell *matCellDef="let element"> {{ element.peso }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="estado">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                      <td mat-cell *matCellDef="let element"> {{ element.estado }} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columsShipments"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columsShipments;"></tr>
+                  </table>
+                  <mat-paginator
+                    showFirstLastButtons
+                    color="warn"
+                    [length]="totalResult"
+                    [pageSize]="itemPerPage"
+                    [pageSizeOptions]="pageSizeOptions">
+                  </mat-paginator>
+                </div>
+                <strong class="p-2 d-block text-center" *ngIf="totalResult === 0"> {{ messageEmpty }} </strong>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+        <div class="loading d-flex justify-content-center" *ngIf="loading">
+          <img width="30%" src="assets/img/loader.svg">
+        </div>
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cerrar
+    </button>
+  </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body">
+      <h3 class="titulo">
+        Nuevo
+      </h3>
+      <h4>
+        Completa los datos para agregar uno nuevo
+      </h4>
+      <form [formGroup]="createForm" class="form form-step" (ngSubmit)="onSubmit()">
+        <div class="pasos current" data-step="step-1">
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Razón social</mat-label>
+                <input matInput type="text" formControlName="business_name"
+                  [ngClass]="{ 'is-invalid': submittedForm && createForm.get('business_name')?.errors }">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input matInput type="text" formControlName="name"
+                  [ngClass]="{ 'is-invalid': submittedForm && createForm.get('name')?.errors }">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Segundo nombre</mat-label>
+                <input matInput type="text" formControlName="surname"
+                  [ngClass]="{ 'is-invalid': submittedForm && createForm.get('surname')?.errors }">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Apellido</mat-label>
+                <input matInput type="text" formControlName="lastname"
+                  [ngClass]="{ 'is-invalid': submittedForm && createForm.get('lastname')?.errors }">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Télefono</mat-label>
+                <input matInput type="text" formControlName="phone"
+                  [ngClass]="{ 'is-invalid': submittedForm && createForm.get('phone')?.errors }">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="text" formControlName="email"
+                  [ngClass]="{ 'is-invalid': submittedForm && createForm.get('email')?.errors }">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Ubicación</mat-label>
+                <input matInput type="text" formControlName="location"
+                  [ngClass]="{ 'is-invalid': submittedForm && createForm.get('location')?.errors }">
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>C.P.</mat-label>
+                <input matInput type="text" formControlName="postal_code" (change)="validateCPCreate()"
+                  [ngClass]="{ 'is-invalid': submittedForm && createForm.get('postal_code')?.errors }">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Estado</mat-label>
+                <mat-select >
+                  <mat-option *ngFor="let item of listStates" [value]="item.state">
+                    {{ item.state }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Ciudad</mat-label>
+                <mat-select >
+                  <mat-option *ngFor=" let item of listCities" [value]="item.city">
+                    {{ item.city }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Municipio</mat-label>
+                <mat-select >
+                  <mat-option *ngFor="let item of listMunicipalities" [value]="item.municipality">
+                    {{ item.municipality }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Colonia</mat-label>
+                <mat-select  formControlName="suburb">
+                  <mat-option *ngFor="let item of listSettlement" [value]="item.settlement">
+                    {{ item.settlement }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Calle</mat-label>
+                <input matInput type="text" formControlName="street"
+                  [ngClass]="{ 'is-invalid': submittedForm && createForm.get('street')?.errors }">
+              </mat-form-field>
+              <div class="row">
+                <div class="col-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>No. Ext.</mat-label>
+                    <input matInput type="text" formControlName="outdoor_number"
+                      [ngClass]="{ 'is-invalid': submittedForm && createForm.get('outdoor_number')?.errors }">
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>No. Int.</mat-label>
+                    <input matInput type="text" formControlName="interior_number">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages"
+              [innerHTML]="errorMessages"></small>
+          </div>
+        </div>
+        <div class="controls">
+          <button type="submit" class="btn btn-secondary w-100 mt-3">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cancelar
+    </button>
+  </div>
+</div>

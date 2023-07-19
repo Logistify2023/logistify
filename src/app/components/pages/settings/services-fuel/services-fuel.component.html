@@ -1,0 +1,74 @@
+<main class="main-content">
+  <div class="container-fluid header_pages">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12"> <h2>Productos con combustibles</h2> </div>
+    </div>
+  </div>
+  <div class="container-fluid logistify-table tableUsers mt-1">
+    <div class="row">
+      <div class="col-12 p-md-4 logistify-table">
+        <div class="mat-elevation-z8" *ngIf="!loading">
+          <table mat-table matSort [dataSource]="dataSource">
+            <ng-container matColumnDef="service">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre producto</th>
+              <td mat-cell *matCellDef="let element">{{element.service}}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+              <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+            <ng-container matColumnDef="created_at">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Creado</th>
+              <td mat-cell *matCellDef="let element"> {{element.created_at}} </td>
+            </ng-container>
+            <ng-container matColumnDef="updated_at">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Actualizado</th>
+              <td mat-cell *matCellDef="let element"> {{element.updated_at}} </td>
+            </ng-container>
+            <ng-container matColumnDef="fuel">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Combustible</th>
+              <td mat-cell *matCellDef="let element"> {{ element.fuel }} </td>
+            </ng-container>
+            <ng-container matColumnDef="update">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon fontIcon="edit" (click)="editServiceFuel(element)" *ngIf="element.editFuel == false"></mat-icon>
+                <form [formGroup]="updateServiceFuelForm" class="form" *ngIf="element.editFuel == true">
+                  <div class="row">
+                    <div class="col-6">
+                      <mat-form-field appearance="outline">
+                        <input matInput type="number" min="0" max="100" formControlName="fuel" [placeholder]="element.fuel" required>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-6 d-flex align-items-center">
+                      <mat-icon fontIcon="check_circle" (click)="updateServiceFuel(element)"></mat-icon>
+                      <mat-icon fontIcon="clear" (click)="cancelEditFuel(element)"></mat-icon>
+                    </div>
+                  </div>
+                </form>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell text-center" [colSpan]="displayedColumns.length">
+                <strong class="p-2 d-block"> {{ messageEmpty }} </strong>
+              </td>
+            </tr>
+          </table>
+          <!-- paginator -->
+          <mat-paginator
+            showFirstLastButtons
+            color="warn"
+            [length]="totalResult"
+            [pageSize]="itemPerPage"
+            [pageSizeOptions]="pageSizeOptions">
+          </mat-paginator>
+        </div>
+        <div class="loading" *ngIf="loading">
+          <img width="45%" height="45%" src="assets/img/loader.svg">
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

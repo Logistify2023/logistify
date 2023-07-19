@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "9f713fa7-7eb1-4634-9b9e-ae9001ecad3d",
+		"name": "pruebas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "store",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "url",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "src",
+							"type": "file",
+							"src": "/Users/fernandohurtado/Documents/Desarrollo/Personal/Navigation/logistify/desarrollo/assets/images/logistify/img-perfil.png",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "Users por defecto",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Esta es la imagen que se aplicara a todos los usuarios por defecto",
+							"type": "text"
+						},
+						{
+							"key": "is_local",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{cuerpoAPI}}/images"
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,183 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body modal-details text-start">
+      <h3 class="titulo"> Información </h3>
+      <div class="row">
+        <div class="col-12 col-md-3">
+          <img src="" class="w-100" alt="">
+        </div>
+        <div class="col-12 col-md-5"> {{ objectDetails.courier }} <br /> {{ objectDetails.description }} </div>
+        <div class="col-12 col-md-4"> T: {{ objectDetails.phone }} <br /> M: {{ objectDetails.email }} </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-12">
+          <div class="settings">
+            <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+              <mat-tab label="Configuración">
+                <div class="info row">
+                  <div class="col-lg-6 col-md-6">
+                    <strong> {{ objectDetails.description }} </strong><label class="mb-3"> Descripcion </label>
+                    <strong> {{ objectDetails.created_at }} </strong><label class="mb-3"> Creada </label>
+                  </div>
+                  <div class="col-lg-6 col-md-6">
+                    <strong> {{ objectDetails.alias }} </strong><label class="mb-3"> Alias </label>
+                    <strong> {{ objectDetails.updated_at }} </strong><label class="mb-3"> Actualizada </label>
+                  </div>
+                  <div class="col-12">
+                    <h3 *ngIf="objectDetails.setting" class="mt-4">Características</h3>
+                  </div>
+                  <div class="col-lg-4 col-md-4 info">
+                    <strong> {{ objectDetails.setting?.max_width }} </strong><label class="mb-3"> Ancho máximo </label>
+                    <strong> {{ objectDetails.setting?.volumetric_divider }} </strong><label class="mb-3"> Divisor volumétrico</label>
+                    <strong> {{ objectDetails.setting?.number_of_kilograms }} </strong><label class="mb-3"> No. de kilogramos</label>
+                    <strong> {{ objectDetails.setting?.created_at }} </strong><label class="mb-3"> Fecha creación</label>
+                  </div>
+                  <div class="col-lg-4 col-md-4">
+                    <strong> {{ objectDetails.setting?.max_high }} </strong><label class="mb-3"> Alto máx.</label>
+                    <strong> {{ objectDetails.setting?.number_of_groups_origen }} </strong><label class="mb-3"> Grupos de origen</label>
+                    <strong> {{ objectDetails.setting?.number_of_zones }} </strong><label class="mb-3"> No. de zonas</label>
+                    <strong> {{ objectDetails.setting?.updated_at }} </strong><label class="mb-3"> Fecha actualización</label>
+                  </div>
+                  <div class="col-lg-4 col-md-4">
+                    <strong> {{ objectDetails.setting?.max_long }} </strong><label class="mb-3"> Longitud máx.</label>
+                    <strong> {{ objectDetails.setting?.max_weight }} </strong><label class="mb-3"> Peso máx.</label>
+                    <strong> {{ objectDetails.setting?.max_kilogram }} </strong><label class="mb-3"> Kilogramos máx.</label>
+                    <strong> {{ objectDetails.setting?.number_of_groups_destine }} </strong><label class="mb-3"> Grupos de destino</label>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Tipo de mensajerías">
+                <div *ngIf="objectDetails.courier_types">
+                  <div class="logistify-table table-delete-false" *ngIf="objectDetails.courier_types.length > 0">
+                    <table mat-table matSort class="w-100" [dataSource]="objectDetails.courier_types">
+                      <ng-container matColumnDef="courier_type">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+                        <td mat-cell *matCellDef="let element"> {{element.courier_type}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="description">
+                        <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                      </ng-container>
+                      <tr mat-header-row *matHeaderRowDef="columsDetails_CourierTypes"></tr>
+                      <tr mat-row *matRowDef="let row; columns: columsDetails_CourierTypes;"></tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[15, 30, 45]" showFirstLastButtons aria-label="Select page of periodic elements"> </mat-paginator>
+                  </div>
+                  <strong class="p-2 d-block" *ngIf="objectDetails.courier_types.length === 0"> No existen elementos para mostrar.</strong>
+                </div>
+                <div class="info" *ngIf="objectDetails.provider">
+                  <strong> {{ objectDetails.provider.business_name }} </strong><label class="mb-3"> Proveedor </label>
+                  <strong> {{ objectDetails.provider.url }} </strong><label class="mb-3"> Sitio </label>
+                  <strong> {{ objectDetails.provider.description }} </strong><label class="mb-3"> Descripción</label>
+                  <strong> {{ objectDetails.provider.status }} </strong><label class="mb-3"> Estado</label>
+                  <strong> {{ objectDetails.provider.created_at }} </strong><label class="mb-3"> Fecha de creación </label>
+                  <strong> {{ objectDetails.provider.updated_at }} </strong><label class="mb-3"> Fecha de actualizacion </label>
+                  <strong *ngIf="objectDetails.provider.deleted_at"> {{ objectDetails.provider.deleted_at }} </strong><label class="mb-3" *ngIf="objectDetails.provider.deleted_at"> Fecha de eliminación </label>
+                </div>
+              </mat-tab>
+              <mat-tab label="Productos">
+                <div *ngIf="objectDetails.services">
+                  <div class="logistify-table table-delete-false" *ngIf="objectDetails.services.length > 0">
+                    <table mat-table matSort class="w-100" [dataSource]="objectDetails.services">
+                      <ng-container matColumnDef="service">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Producto </th>
+                        <td mat-cell *matCellDef="let element"> {{element.service}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="freight">
+                        <th mat-header-cell *matHeaderCellDef> Combustible </th>
+                        <td mat-cell *matCellDef="let element"> {{element.freight}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="fuel">
+                        <th mat-header-cell *matHeaderCellDef> Gasolina </th>
+                        <td mat-cell *matCellDef="let element"> {{element.fuel}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="international">
+                        <th mat-header-cell *matHeaderCellDef> Internacional </th>
+                        <td mat-cell *matCellDef="let element"> {{element.international}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="is_ltl">
+                        <th mat-header-cell *matHeaderCellDef> LTL </th>
+                        <td mat-cell *matCellDef="let element"> {{element.is_ltl}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="multi_piece">
+                        <th mat-header-cell *matHeaderCellDef> M/P </th>
+                        <td mat-cell *matCellDef="let element"> {{element.multi_piece}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                      </ng-container>
+                      <tr mat-header-row *matHeaderRowDef="columsDetails_Services"></tr>
+                      <tr mat-row *matRowDef="let row; columns: columsDetails_Services;"></tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[15, 30, 45]" showFirstLastButtons aria-label="Select page of periodic elements"> </mat-paginator>
+                  </div>
+                  <strong class="p-2 d-block" *ngIf="objectDetails.services.length === 0"> No existen elementos para mostrar.</strong>
+                </div>
+              </mat-tab>
+              <mat-tab label="Días Adicionales">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-12 col-md-6"> <h3>Días Adicionales</h3> </div>
+                    <div class="col-12 col-md-6 text-end">
+                      <div class="form-group" *ngIf="loadingUploadFile == false">
+                        <input type="file" name="" id="importAdditionalFile" (change)="importAdditional($event)"
+                          accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                          style="opacity: 0;">
+                        <label for="importAdditionalFile" class="mat-focus-indicator mat-stroked-button mat-button-base">Importar</label>
+                      </div>
+                    </div>
+                    <div class="col-12 info" *ngIf="objectDetails.additional">
+                      <strong> {{ objectDetails.additional.additional }} </strong><label class="mb-3"> Nombre </label>
+                      <strong> {{ objectDetails.additional.description }} </strong><label class="mb-3"> Descripción </label>
+                      <strong> {{ objectDetails.additional.created_at }} </strong> <label class="mb-3"> Fecha de creación</label>
+                      <strong> {{ objectDetails.additional.updated_at }} </strong> <label class="mb-3"> Fecha de actualizacion</label>
+                      <strong *ngIf="objectDetails.additional.deleted_at"> {{ objectDetails.additional.deleted_at }} </strong>
+                      <label class="mb-3" *ngIf="objectDetails.additional.deleted_at"> Fecha de eliminación </label>
+                      <div class="logistify-table overflow-auto" *ngIf="listHeadersAdditional">
+                        <table class="w-100 table table-bordered mat-table">
+                          <thead class="table-light">
+                            <th *ngFor="let item of objectDetails.additional.data.headers">{{ item }}</th>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of objectDetails.additional.data.content">
+                              <td *ngFor="let v of item"><strong>{{ v }}</strong></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <strong class="p-2 d-block" *ngIf="!objectDetails.additional">
+                      No existen elementos para mostrar.</strong>
+                    <div class="col-12 text-center" *ngIf="loadingUploadFile == true">
+                      <div class="loading">
+                        <img src="assets/img/loader.svg" alt="">
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="col-12 text-end" *ngIf="loadingUploadFile == false">
+                      <a class="mb-3" mat-stroked-button [href]="urlEndPoint + '/export/courier/additionals/' + id"
+                        target="_blank">
+                        Descargar template</a>
+                      <br />
+                      <a mat-stroked-button [href]="urlEndPoint + '/export/data/courier/additionals/' + id" target="_blank">
+                        Exportar Datos</a>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cerrar
+    </button>
+  </div>
+</div>

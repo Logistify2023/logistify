@@ -1,0 +1,65 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body modal-details text-start">
+      <h3 class="titulo"> Información del producto </h3>
+      <div class="row" *ngIf="!loanding">
+        <div class="col-12">
+          <!-- Detalles principales -->
+          <div class="info row" *ngIf="objectDetails">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <strong> {{ objectDetails.service }} </strong><label class="mb-3"> Producto </label>
+              <strong> {{ objectDetails.description }} </strong><label class="mb-3"> Descripción </label>
+              <strong> {{ objectDetails.days }} </strong><label class="mb-3"> Días de entrega </label>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <strong> {{ objectDetails.service_type_stg }} </strong><label class="mb-3"> Tipo producto </label>
+              <strong> {{ objectDetails.courier_stg }} </strong><label class="mb-3"> Mensajería </label>
+              <strong> {{ objectDetails.courier_type_stg }} </strong><label class="mb-3"> Tipo mensajería </label>
+            </div>
+            <!-- Mas detalles -->
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <strong> {{ objectDetails.guaranteed_delivery }} </strong><label class="mb-3"> Garantía entrega </label>
+                <strong> {{ objectDetails.multi_piece }} </strong><label class="mb-3"> Multipieza  </label>
+                <strong> {{ objectDetails.international }} </strong><label class="mb-3"> Internacional </label>
+                <strong> {{ objectDetails.pickup }} </strong><label class="mb-3"> Recolecta </label>
+                <strong> {{ objectDetails.is_ltl }} </strong><label class="mb-3"> Carga pesada </label>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6" *ngIf="objectDetails.setting">
+                <strong> {{ objectDetails.setting.max_long }} </strong><label class="mb-3"> Largo máximo </label>
+                <strong> {{ objectDetails.setting.max_width }} </strong><label class="mb-3"> Ancho máximo </label>
+                <strong> {{ objectDetails.setting.max_high }} </strong><label class="mb-3"> Alto máximo </label>
+                <strong> {{ objectDetails.setting.max_weight }} </strong><label class="mb-3"> Peso máximo </label>
+                <strong> {{ objectDetails.setting.max_kilogram }} </strong><label class="mb-3"> Kilogramos máximos </label>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6" *ngIf="objectDetails.setting">
+                <strong> {{ objectDetails.setting.number_of_groups_origen }} </strong><label class="mb-3"> Número de grupos origen </label>
+                <strong> {{ objectDetails.setting.number_of_groups_destine }} </strong><label class="mb-3"> Número de grupos destino </label>
+                <strong> {{ objectDetails.setting.number_of_detines }} </strong><label class="mb-3"> Número de destinos </label>
+                <strong> {{ objectDetails.setting.number_of_zones }} </strong><label class="mb-3"> Número de zonas </label>
+                <strong> {{ objectDetails.setting.number_of_kilograms }} </strong><label class="mb-3"> Número de kilogramos </label>
+              </div>
+            </div>
+            <!-- Other -->
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <strong> {{ objectDetails.status }} </strong><label class="mb-3"> Estado </label>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <strong> {{ objectDetails.created_at }} </strong><label class="mb-3"> Fecha de creación </label>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <strong> {{ objectDetails.updated_at }} </strong><label class="mb-3"> Fecha de actualización </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Loanding -->
+      <div class="loading text-center" *ngIf="loanding">
+        <img width="45%" height="45%" src="assets/img/loader.svg">
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close> Cerrar </button>
+  </div>
+</div>

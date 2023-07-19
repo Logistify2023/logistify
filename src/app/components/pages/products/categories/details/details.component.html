@@ -1,0 +1,61 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body modal-details text-start">
+      <h3 class="titulo">
+        Información
+      </h3>
+      <div class="row">
+        <div class="col-12 ">
+          <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+            <mat-tab label="Detalles">
+              <div class="info" *ngIf="objectDetails">
+                <strong> {{ objectDetails.description }} </strong><label class="mb-3"> Descripción</label>
+
+                <strong> {{ objectDetails.status }} </strong><label class="mb-3"> Estado</label>
+                <strong> {{ objectDetails.created_at }} </strong><label class="mb-3"> Fecha de creación </label>
+                <strong> {{ objectDetails.updated_at }} </strong><label class="mb-3"> Fecha de actualizacion
+                </label>
+                <strong *ngIf="objectDetails.deleted_at"> {{ objectDetails.deleted_at }} </strong><label class="mb-3"
+                  *ngIf="objectDetails.deleted_at"> Fecha de eliminación </label>
+              </div>
+            </mat-tab>
+            <mat-tab label="Mercancías">
+              <div *ngIf="objectDetails.products">
+                <div class="logistify-table table-delete-false" *ngIf="objectDetails.products.length > 0">
+                  <table mat-table matSort class="w-100" [dataSource]="objectDetails.products">
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Mercancía </th>
+                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="key">
+                      <th mat-header-cell *matHeaderCellDef> Clave </th>
+                      <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="existence">
+                      <th mat-header-cell *matHeaderCellDef> Existencia </th>
+                      <td mat-cell *matCellDef="let element"> {{element.existence}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columsDetails_Products"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columsDetails_Products;"></tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[15, 30, 45]" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+                  </mat-paginator>
+                </div>
+                <strong class="p-2 d-block" *ngIf="objectDetails.products.length === 0">
+                  No existen elementos para mostrar.</strong>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cerrar
+    </button>
+  </div>
+</div>

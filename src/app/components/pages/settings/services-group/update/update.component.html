@@ -1,0 +1,72 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body" *ngIf="!loanding">
+      <h3 class="titulo"> {{ objectGroup.group }} </h3>
+      <!-- Form for groups origin -->
+      <div class="form form-step mt-3" (ngSubmit)="onSubmit()">
+        <form #addOriginForm="ngForm" class="form" *ngIf="!btnOrigin">
+          <div class="row mb-3">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Lista de grupos</mat-label>
+                <mat-select name="groupOrigin" [(ngModel)]="groupOrigin" required>
+                  <mat-option *ngFor="let item of listGroupsOrigin" [value]="item"> {{ item }} </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Código postal</mat-label>
+                <input matInput type="text" minlength="5" maxlength="5" name="postalOrigin" required [(ngModel)]="postalOrigin" [disabled]="!groupOrigin">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+              <button class="btn btn-small btn-primary btn-square mt-1" (click)="addToArraGroupOrigin()" [disabled]="!addOriginForm.form.valid">
+                <mat-icon aria-hidden="false" aria-label="Agregar nueva" fontIcon="add"></mat-icon> Agregar CP
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="loading text-center" *ngIf="btnOrigin">
+          <img width="15%" height="15%" src="assets/img/loader.svg">
+        </div>
+      </div>
+      <!-- Form for groups destin -->
+      <div class="form form-step mt-3" (ngSubmit)="onSubmit()" *ngIf="isSepared">
+        <hr>
+        <form #addDestinForm="ngForm" class="form" *ngIf="!btnDestin">
+          <div class="row mb-3">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Lista de grupos destino</mat-label>
+                <mat-select name="groupDestin" [(ngModel)]="groupDestin" required>
+                  <mat-option *ngFor="let item of listGroupsDestin" [value]="item"> {{ item }} </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Código postal</mat-label>
+                <input matInput type="text" minlength="5" maxlength="5" name="postalDestin" required [(ngModel)]="postalDestin" [disabled]="!groupDestin">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+              <button class="btn btn-small btn-primary btn-square mt-1" (click)="addToArraGroupDestin()" [disabled]="!addDestinForm.form.valid">
+                <mat-icon aria-hidden="false" aria-label="Agregar nueva" fontIcon="add"></mat-icon> Agregar CP destino
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="loading text-center" *ngIf="btnDestin">
+          <img width="15%" height="15%" src="assets/img/loader.svg">
+        </div>
+      </div>
+    </mat-dialog-content>
+    <!-- Loanding stile -->
+    <div class="loading text-center" *ngIf="loanding">
+      <img width="45%" height="45%" src="assets/img/loader.svg">
+    </div>
+    <!-- Button close -->
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close> Regresar </button>
+  </div>
+</div>

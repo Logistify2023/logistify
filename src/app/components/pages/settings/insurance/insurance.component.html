@@ -1,0 +1,68 @@
+<main class="main-content">
+  <div class="container-fluid header_pages">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <h2> Cotizador de seguros </h2>
+      </div>
+    </div>
+  </div>
+  <!-- Input for data -->
+  <div class="container-fluid logistify-table tableUsers mt-3">
+    <form #insueranceForm="ngForm" class="form">
+      <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-12 form">
+          <div class="input-group">
+            <mat-form-field appearance="outline">
+              <mat-label> Monto para asegurar </mat-label>
+              <input matInput type="number" max="9999999999999999999" [(ngModel)]="sure" name="sure" required min="1">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 mt-1 mb-1">
+              <button (click)="quoteInsurance()" mat-raised-button color="primary" [disabled]="!insueranceForm.form.valid"> Cotizar seguro </button>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 mt-1 mb-1">
+              <button (click)="clearAll()" mat-raised-button color="secondary"> Limpiar datos </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- List data -->
+    <div class="row mt-3" *ngIf="showData">
+      <div class="row grid-cards d-flex align-items-stretch" *ngIf="!loading">
+        <div class="col-lg-12 col-md-12 col-sm-12 mb-3" *ngFor="let courier of listData">
+          <div class="card">
+            <div class="row mt-2">
+              <div class="col-lg-4 col-md-4 col-sm-4">
+                <img src="{{courier.link}}" alt="" class="w-40 img-fluid">
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="col-lg-12 col-md-12 col-sm-12 info">
+                  <h2><strong> {{ courier.courier }} </strong></h2>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 info">
+                  <strong> {{ courier.description }} </strong>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 info">
+                  <strong> {{ courier.alias }} </strong>
+                </div>
+                <hr>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <h2 class="text-danger"> <strong> ${{ courier.sure }} </strong> </h2>
+                </div>
+                <hr>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Loanding -->
+      <div class="loading" *ngIf="loading">
+        <img width="65%" height="65%" src="assets/img/loader.svg">
+      </div>
+    </div>
+  </div>
+</main>

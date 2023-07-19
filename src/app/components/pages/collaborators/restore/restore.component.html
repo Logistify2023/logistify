@@ -1,0 +1,24 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body">
+      <h3 class="titulo">
+        ¿Estás seguro que <br />deseas restaurar al colaborador?
+      </h3>
+      <form [formGroup]="form" class="form form-step" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-12">
+            <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages" [innerHTML]="errorMessages | safeHtml"></small>
+          </div>
+        </div>
+        <div class="controls">
+          <button type="submit" class="btn btn-secondary w-100 mt-3">
+            <span>Restaurar colaborador</span>
+          </button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Regresar
+    </button>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body modal-details text-start">
+      <h3 class="titulo">
+        Información
+      </h3>
+      <div class="row">
+        <div class="col-12 ">
+          <div class="info row" *ngIf="objectDetails">
+            <strong> {{ objectDetails.web_service }} </strong><label class="mb-3"> Servicio web</label>
+            <strong> {{ objectDetails.description }} </strong><label class="mb-3"> Descripción</label>
+            <h4 *ngIf="objectDetails.payload?.length !== 0" class="mb-1">Payload</h4>
+            <div class="row" *ngFor="let item of objectDetails.payload">
+              <div class="col-6">
+                <strong> {{ item.name }} </strong><label class="mb-2"> Name</label>
+              </div>
+              <div class="col-6">
+                <strong> {{ item.value }} </strong><label class="mb-2"> Value</label>
+              </div>
+              <hr />
+            </div>
+
+            <strong> {{ objectDetails.status }} </strong><label class="mb-3"> Estado</label>
+            <strong> {{ objectDetails.created_at }} </strong><label class="mb-3"> Fecha de creación </label>
+            <strong> {{ objectDetails.updated_at }} </strong><label class="mb-3"> Fecha de actualizacion
+            </label>
+            <strong *ngIf="objectDetails.deleted_at"> {{ objectDetails.deleted_at }} </strong><label class="mb-3"
+              *ngIf="objectDetails.deleted_at"> Fecha de eliminación </label>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cerrar
+    </button>
+  </div>
+</div>

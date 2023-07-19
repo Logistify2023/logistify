@@ -1,0 +1,137 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body">
+      <h3 class="titulo">
+        Actualizar
+      </h3>
+      <form [formGroup]="updateForm" class="form form-step" (ngSubmit)="onSubmit()">
+        <div class="pasos current" data-step="step-1">
+          <div class="row">
+              <div class="col-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Mensajería</mat-label>
+                  <input matInput formControlName="courier">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Alias</mat-label>
+                  <input matInput formControlName="alias">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Link</mat-label>
+                  <input matInput formControlName="link">
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Tipo de mensajería</mat-label>
+                  <mat-select formControlName="courier_types" multiple>
+                    <mat-option *ngFor="let item of listCourierTypes" [value]="item.id">
+                      {{ item.courier_type }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input matInput formControlName="email">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Teléfono</mat-label>
+                  <input matInput type="number" formControlName="phone">
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Porcentage</mat-label>
+                    <input matInput type="number" formControlName="percentage">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Max Largo</mat-label>
+                    <input matInput type="number" formControlName="max_long">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Max. Ancho</mat-label>
+                    <input matInput type="number" formControlName="max_width">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Max Alto</mat-label>
+                    <input matInput type="number" formControlName="max_high">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Max Peso</mat-label>
+                    <input matInput type="number" formControlName="max_weight">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Divisor Volumetrico</mat-label>
+                    <input matInput type="number" formControlName="volumetric_divider">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Max. Kilogramo</mat-label>
+                    <input matInput type="number" formControlName="max_kilogram">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Número de grupos de origen</mat-label>
+                    <input matInput type="number" formControlName="number_of_groups_origen">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Número de grupos de destino</mat-label>
+                    <input matInput type="number" formControlName="number_of_groups_destine">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Número de zonas</mat-label>
+                    <input matInput type="number" formControlName="number_of_zones">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Número de Kilogramos</mat-label>
+                    <input matInput type="number" formControlName="number_of_kilograms">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Descripción</mat-label>
+                    <input matInput formControlName="description">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="true" id="has_api_c"
+                    formControlName="has_api">
+                  <label class="form-check-label" for="has_api_c">
+                    ¿Es API?
+                  </label>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="true" id="can_enable_u"
+                    formControlName="status">
+                  <label class="form-check-label" for="can_enable_u">
+                    ¿Está Disponible?
+                  </label>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages"
+              [innerHTML]="errorMessages"></small>
+          </div>
+        </div>
+        <div class="controls">
+          <button type="submit" class="btn btn-secondary w-100 mt-3">
+            Actualizar
+          </button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cancelar
+    </button>
+  </div>
+</div>

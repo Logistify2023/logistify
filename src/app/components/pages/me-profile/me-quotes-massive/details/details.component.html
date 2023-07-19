@@ -1,0 +1,91 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body modal-details text-start">
+      <h3 class="titulo text-center">
+        Precios cotización masiva
+      </h3>
+      <div class="row">
+        <div class="col-12">
+          <div *ngIf="objectDetails || !loanding">
+            <div class="container" *ngIf="objectDetails.data">
+              <div class="row mb-3" *ngIf="objectDetails.columns.length > 0">
+                <p>Seleccionar por producto:</p>
+                <div class="col mb-2" *ngFor="let item of objectDetails.columns">
+                  <mat-radio-group name="{{ item.product }}" (change)="selectedAllServices(item)">
+                    <mat-radio-button value="{{ item.id }}" [checked]="item.checked" >{{ item.product }}</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+              <div class="row" *ngIf="objectDetails.data.length > 0">
+                <p>Seleccionar por precio:</p>
+                <div class="col mb-2">
+                  <mat-radio-button value="price_min" [checked]="filterPriceMinActive" (change)="selectedPriceMin()">Más bajo</mat-radio-button>
+                </div>
+                <div class="col mb-2">
+                  <mat-radio-button value="price_max" [checked]="filterPriceMaxActive" (change)="selectedPriceMax()">Más alto</mat-radio-button>
+                </div>
+              </div>
+            
+              <div class="logistify-table overflow-auto m-3" *ngIf="objectDetails.data.length > 0">
+                <table class="w-100 table table-bordered mat-table">
+                  <thead class="table-light">
+                    <th scope="col">Remitente</th>
+                    <th scope="col">Destinatario</th>
+                    <th scope="col">Piezas</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Peso cot.</th>
+                    <th scope="col">Peso vol.</th>
+                    <th scope="col" *ngFor="let item of objectDetails.columns">{{ item.product }}</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of objectDetails.data">
+                      <td>{{item.origin.branch_office}}</td>
+                      <td>{{item.destin.branch_office}}</td>
+                      <td>{{item.quote.pieces}}</td>
+                      <td>{{item.packages[0].type}}</td>
+                      <td>{{item.quote.weight_quote}}</td>
+                      <td>{{item.quote.weight_volum}}</td>
+                      <td *ngFor="let element of item.services">
+                        <mat-radio-group name="{{item.identify}}" (change)="selectedService(element, item.identify)">
+                          <mat-radio-button value="{{element.id}}" 
+                            [checked]="element.checked" *ngIf="element.price > 0">
+                            {{ element.price | currency}}
+                          </mat-radio-button>
+                        </mat-radio-group>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="6">Precio total:</th>
+                      <td *ngFor="let item of objectDetails.total"><strong>{{item.total | currency}}</strong></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <strong class="p-2 d-block text-center" *ngIf="objectDetails.data.length == 0">
+                No existen elementos para mostrar.
+              </strong>
+              <div class="row">
+                <div class="col mb-3">
+                  <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages"
+                    [innerHTML]="errorMessages"></small>
+                </div>
+              </div>
+              <div class="controls d-flex justify-content-center" *ngIf="objectDetails.data.length > 0">
+                <button mat-button class="btn btn-secondary" (click)="onSubmit()" *ngIf="!loading"> Generar guías </button>
+                <button mat-button class="btn btn-secondary" disabled *ngIf="loading"> Generar guías </button>
+              </div>
+            </div>
+          </div>
+          <div class="loading d-flex justify-content-center" *ngIf="loanding">
+            <img width="30%" src="assets/img/loader.svg">
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cerrar
+    </button>
+  </div>
+</div>

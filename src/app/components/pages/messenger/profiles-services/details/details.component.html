@@ -1,0 +1,214 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body modal-details text-start">
+      <h3 class="titulo">
+        Información
+      </h3>
+      <div class="row">
+        <div class="col-12">
+          <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+            <mat-tab label="Detalles">
+              <div class="info row" *ngIf="objectDetails">
+                <strong *ngIf="objectDetails.profile"> {{ objectDetails.profile }} </strong><label class="mb-3">Perfil</label>
+                <strong *ngIf="objectDetails.profile_services"> {{ objectDetails.profile_services.length }} </strong><label class="mb-3">Numero de productos asociados</label>
+                <strong> {{ objectDetails.description }} </strong>
+                <label class="mb-3">Descripción</label>
+                <strong> {{ objectDetails.status }} </strong><label class="mb-3"> Estado</label>
+                <strong> {{ objectDetails.created_at }} </strong><label class="mb-3"> Fecha de creación </label>
+                <strong> {{ objectDetails.updated_at }} </strong><label class="mb-3"> Fecha de actualizacion
+                </label>
+                <strong *ngIf="objectDetails.deleted_at"> {{ objectDetails.deleted_at }} </strong><label class="mb-3"
+                  *ngIf="objectDetails.deleted_at"> Fecha de eliminación </label>
+              </div>
+            </mat-tab>
+            <mat-tab label="Clientes">
+              <div *ngIf="objectDetails.customers">
+                <div class="logistify-table table-delete-false" *ngIf="objectDetails.customers.length > 0">
+                  <table mat-table matSort class="w-100" [dataSource]="objectDetails.customers">
+                    <ng-container matColumnDef="business_name">
+                      <th mat-header-cell *matHeaderCellDef> Razón social </th>
+                      <td mat-cell *matCellDef="let element"> {{element.business_name}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="type_custumer">
+                      <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                      <td mat-cell *matCellDef="let element"> {{element.type_custumer}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columsDetails_Customers"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columsDetails_Customers;"></tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[15, 30, 45]" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+                  </mat-paginator>
+                </div>
+                <strong class="p-2 d-block" *ngIf="objectDetails.customers.length === 0"> No existen elementos para mostrar.</strong>
+              </div>
+            </mat-tab>
+            <mat-tab label="Productos">
+              <div class="col-12 mb-3 d-grid d-md-flex justify-content-center">
+                <mat-button-toggle-group [(ngModel)]="actionService" (click)="defineActionService()">
+                  <mat-button-toggle value="createService">
+                    Agregar producto
+                  </mat-button-toggle>
+                  <mat-button-toggle value="editService">
+                    Editar producto
+                  </mat-button-toggle>
+                  <mat-button-toggle value="deleteService">
+                    Eliminar producto
+                  </mat-button-toggle>
+                </mat-button-toggle-group>
+              </div>
+              <div class="row w-100" [hidden]="hiddenForm">
+                <form [formGroup]="formService" class="form" (ngSubmit)="submitService()" >
+                  <div class="row col-12">
+                    <div class="col-4">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Producto</mat-label>
+                        <mat-select formControlName="service_id" (selectionChange)="changeService()">
+                          <mat-option *ngFor="let item of listServices" [value]="item.id">
+                            {{(actionService == 'createService') ? item.service: item.service.service }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-4">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Tipo de precio</mat-label>
+                        <mat-select formControlName="type_price_id" (selectionChange)="changeTypePrice()">
+                          <mat-option *ngFor="let item of listTypePrices" [value]="item.id">
+                            {{ item.price_type }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-2" *ngIf="isChangePrice">
+                      <div class="row" *ngIf="fileRequired">
+                        <div class="mat-form-input-group col-6">
+                          <input type="file" name="" id="fileUpload" (change)="onFileChange($event)"
+                            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                            style="opacity: 0;">
+                          <label for="fileUpload" title="Subir archivo" class="mat-focus-indicator mat-stroked-button mat-button-base btn-secondary">
+                            <mat-icon fontIcon="upload_file"></mat-icon>
+                          </label>
+                        </div>
+                        <div class="col-6 text-end">
+                          <a class="mb-3 btn-morado" title="Descargar archivo" mat-stroked-button [href]="urlEndPoint + '/export/service/prices/' + idService" target="_blank" [hidden]="urlIdService">
+                          <mat-icon fontIcon="download_file"></mat-icon>
+                          </a>
+                          <a class="mb-3 btn-morado" title="Descargar archivo" mat-stroked-button [href]="urlEndPoint + '/export/profile_service/prices/' + idService" target="_blank" [hidden]="urlIdRegister">
+                            <mat-icon fontIcon="download_file"></mat-icon>
+                          </a>
+                        </div>
+                      </div>
+                      <mat-form-field appearance="outline" *ngIf="!fileRequired">
+                        <mat-label>Porcentaje</mat-label>
+                        <input matInput type="number" formControlName="porcentaje">
+                      </mat-form-field>
+                      <div class="row">
+                        <mat-checkbox class="d-block text-start" formControlName="status" *ngIf="actionService == 'editService'">¿Está Disponible?</mat-checkbox>
+                      </div>
+                    </div>
+                    <div class="col-2 text-end">
+                      <button mat-raised-button color="primary" type="submit" *ngIf="actionService == 'createService'">Agregar</button>
+                      <button mat-raised-button color="primary" type="submit" *ngIf="actionService == 'editService'">Editar</button>
+                      <button mat-raised-button color="primary" type="submit" *ngIf="actionService == 'deleteService'">Eliminar</button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-10">
+                      <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages"
+                        [innerHTML]="errorMessages"></small>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div *ngIf="objectDetails.profile_services">
+                <div class="logistify-table table-delete-false" *ngIf="objectDetails.profile_services.length > 0">
+                  <table mat-table matSort class="w-100" [dataSource]="objectDetails.profile_services">
+                    <ng-container matColumnDef="Services">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Producto </th>
+                      <td mat-cell *matCellDef="let element"> {{element.service.service}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                      <td mat-cell *matCellDef="let element">
+                        {{element.status}}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="type_price">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo de precio</th>
+                      <td mat-cell *matCellDef="let element">
+                        {{element.type_price.price_type}}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="porcentaje">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Porcentaje </th>
+                      <td mat-cell *matCellDef="let element"> {{element.percentaje}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[15, 30, 45]" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+                  </mat-paginator>
+                </div>
+                <strong class="p-2 d-block" *ngIf="objectDetails.profile_services.length === 0">
+                  No existen elementos para mostrar.</strong>
+              </div>
+            </mat-tab>
+            <mat-tab label="Consultar precios del producto">
+              <div class="container">
+                <div class="row">
+                  <div class="col-12 col-md-12">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Producto</mat-label>
+                      <mat-select [(ngModel)]="service_file" (selectionChange)="getFileService()">
+                        <mat-option *ngFor="let item of listServiceContentFile" [value]="item.id">
+                          {{item.service.service}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-12 info" *ngIf="dataPriceService.price">
+                  <strong> {{ dataPriceService.price.price }} </strong><label class="mb-3"> Precio</label>
+                  <strong> {{ dataPriceService.price.description }} </strong><label class="mb-3"> Descripción </label>
+                  <strong> {{ dataPriceService.price.created_at }} </strong>
+                  <label class="mb-3"> Fecha de creación</label>
+                  <strong> {{ dataPriceService.price.updated_at }} </strong>
+                  <label class="mb-3"> Fecha de actualizacion</label>
+                  <strong *ngIf="dataPriceService.price.deleted_at"> {{ dataPriceService.price.deleted_at }} </strong>
+                  <label class="mb-3" *ngIf="dataPriceService.price.deleted_at"> Fecha de eliminación </label>
+                  <div class="logistify-table overflow-auto" *ngIf="dataPriceService.price.data">
+                    <table class="w-100 table table-bordered mat-table">
+                      <thead class="table-light">
+                        <th *ngFor="let item of dataPriceService.price.data.headers">{{ item }}</th>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of dataPriceService.price.data.content">
+                          <td *ngFor="let v of item"><strong>{{ v }}</strong></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <strong class="p-2 d-block" *ngIf="!dataPriceService.price">No existen elementos para mostrar.</strong>
+                <div class="col-12 text-center" *ngIf="loadingUploadFile == true">
+                  <div class="loading">
+                    <img src="assets/img/loader.svg" alt="">
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cerrar
+    </button>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+.restorePass {
+
+  p {
+    @extend .text-bold;
+    @include calc-rem(20, 'font-size');
+    text-align: center;
+    width: 260px;
+    margin: 0 auto calc(26/16)+rem;
+  }
+
+  #form-restorePass,
+  #form-restorePass-change {
+    .btn {
+      color: $morado;
+
+      &-link {
+        line-height: 60px;
+      }
+    }
+
+    .form-group {
+      position: relative;
+
+      .icon {
+        position: absolute;
+        color: $text;
+        top: 50%;
+        transform: translate(0, -50%);
+        right: 10px;
+
+        &.is-invalid {
+          color: $rojo;
+        }
+      }
+    }
+
+    .btn-form {
+      background-color: $amarillo;
+      margin: calc(10/16)+rem auto 0;
+    }
+  }
+}

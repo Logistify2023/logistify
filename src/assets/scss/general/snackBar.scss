@@ -1,0 +1,49 @@
+.mat-snack-bar-container {
+  position: relative;
+
+  &.mat-snack-bar-success {
+    background-color: #7bf1a4;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      height: 100%;
+      width: 4px;
+      background-color: #20A04C;
+      top: 0;
+    }
+  }
+
+  &.mat-snack-bar-error {
+    background-color: #ee838f;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      height: 100%;
+      width: 4px;
+      background-color: #ad0c1f;
+      top: 0;
+    }
+  }
+
+  .mat-simple-snack-bar-content {
+    font-size: 16px;
+    line-height: 1.5em;
+    color: #000;
+
+    i {
+      font-size: 1.5em;
+      vertical-align: bottom;
+      margin-right: 4px;
+    }
+
+    p {
+      font-size: 14px;
+      padding: 0;
+      margin: 0;
+    }
+  }
+}

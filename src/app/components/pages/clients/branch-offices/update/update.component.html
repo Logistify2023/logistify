@@ -1,0 +1,113 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body">
+      <h3 class="titulo">
+        Actualizar
+      </h3>
+      <h4>
+        Completa los datos para actualizar
+      </h4>
+      <form [formGroup]="updateForm" class="form form-step" (ngSubmit)="onSubmit()">
+        <div class="pasos current" data-step="step-1">
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Sucursal</mat-label>
+                <input matInput formControlName="branch_office">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Descripción</mat-label>
+                <input matInput formControlName="description">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Referencia</mat-label>
+                <input matInput formControlName="reference">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Tipo de sucursal</mat-label>
+                <mat-select formControlName="branch_office_type_id">
+                  <mat-option *ngFor="let item of listOfficeType" [value]="item.id">
+                    {{ item.branch_type }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Cliente</mat-label>
+                <mat-select formControlName="customer_id">
+                  <mat-option *ngFor="let item of listCustomers" [value]="item.id">
+                    {{ item.business_name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>C.P.</mat-label>
+                <input matInput formControlName="postal_code" (change)="validateCP()">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Estado</mat-label>
+                <input matInput formControlName="estado" readonly>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Ciudad</mat-label>
+                <input matInput formControlName="ciudad" readonly>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Municipio</mat-label>
+                <input matInput formControlName="municipio" readonly>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Colonia</mat-label>
+                <mat-select formControlName="suburb">
+                  <mat-option *ngFor="let item of listSettlement" [value]="item.settlement">
+                    {{ item.settlement }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Ubicacion</mat-label>
+                <input matInput formControlName="location">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Calle</mat-label>
+                <input matInput formControlName="street">
+              </mat-form-field>
+              <div class="row">
+                <div class="col-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Número exterior</mat-label>
+                    <input matInput formControlName="outdoor_number">
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Número interior</mat-label>
+                    <input matInput formControlName="interior_number">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <mat-checkbox class="d-block text-start" formControlName="status">¿Está Disponible?</mat-checkbox>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages"
+              [innerHTML]="errorMessages"></small>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button type="submit" class="btn btn-secondary w-100 mt-3">
+            Actualizar
+          </button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cancelar
+    </button>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body modal-details text-start">
+      <h3 class="titulo">
+        Información del colaborador {{ objectDetails.username }}
+      </h3>
+      <div class="row info">
+        <div class="col-12 col-md-3 col-lg-4 perfil-user text-center info">
+          <img src="{{infoImage}}" alt="Foto de perfil" class="w-100 mb-3">
+        </div>
+        <div class="col-12 col-md-4 col-lg-4 perfil-datosContacto">
+          <h3 class="title">Datos de contacto</h3>
+          <div class="row">
+            <div class="col-6 col-md-12 info">
+              <strong> {{ objectDetails.name }} {{ objectDetails.lastname }} {{ objectDetails.surname }} </strong>
+              <label> Nombre completo </label>
+            </div>
+            <div class="col-6 col-md-12 info">
+              <strong> {{ objectDetails.phone }} </strong>
+              <label> Teléfono </label>
+            </div>
+            <div class="col-6 col-md-12 info">
+              <strong> {{ objectDetails.stall?.stall }} </strong>
+              <label> Puesto </label>
+            </div>
+            <div class="col-6 col-md-12 info">
+              <strong> {{ objectDetails.account?.birth_date }} </strong>
+              <small *ngIf="!objectDetails.account?.birth_date">PENDIENTE</small>
+              <label> Fecha de nacimiento </label>
+            </div>
+            <div class="col-12 info">
+              <strong> {{ objectDetails.email }} </strong>
+              <label> Correo electrónico </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-5 col-lg-4 perfil-tipo-cuenta">
+          <h3 class="title">Tipo de cuenta</h3>
+          <div class="row">
+            <div class="col-6 info">
+              <strong *ngFor="let r of objectDetails.roles"> {{ r.rol }} </strong>
+              <small *ngIf="!objectDetails.roles">No tiene rol asignado.</small>
+              <label> Nombre rol </label>
+            </div>
+            <div class="col-6 info">
+              <strong *ngFor="let a of objectDetails.areas"> {{ a.area }} </strong>
+              <small *ngIf="!objectDetails.areas">No tiene área asignada.</small>
+              <label> Nombre área </label>
+            </div>
+          </div>
+
+          <h3 class="title mt-3">Clientes asignados</h3>
+          <div class="row">
+            <div class="col-12 mt-1 info">
+              <ul class="etiquetas">
+                <li *ngFor="let c of objectDetails.customers"> {{ c.business_name }}</li>
+              </ul>
+              <small *ngIf="!objectDetails.customers">No tiene clientes asignados.</small>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-12">
+              <strong> {{ objectDetails.status }} </strong><label class="mb-3"> Estado</label>
+              <strong> {{ objectDetails.created_at }} </strong><label class="mb-3"> Fecha de creación </label>
+              <strong> {{ objectDetails.updated_at }} </strong><label class="mb-3"> Fecha de actualizacion </label>
+              <strong *ngIf="objectDetails.deleted_at"> {{ objectDetails.deleted_at }} </strong><label class="mb-3"
+                *ngIf="objectDetails.deleted_at"> Fecha de eliminación </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cerrar
+    </button>
+  </div>
+</div>

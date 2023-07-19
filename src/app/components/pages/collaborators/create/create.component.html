@@ -1,0 +1,133 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+      <mat-dialog-content class="mat-typography modal-body">
+      <h3 class="titulo">
+        Registro de colaborador
+      </h3>
+      <h4>
+        Completa los datos para agregar uno nuevo colaborador
+      </h4>
+      <div class="form form-step" (ngSubmit)="onSubmit()">
+        <div class="pasos current" data-step="step-1">
+          <div class="row">
+            <div class="col-12">
+              <mat-stepper [linear]="true" #stepper>
+                <mat-step [stepControl]="firstFormGroup" label="Datos generales">
+                  <form [formGroup]="firstFormGroup">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Nombre(s)</mat-label>
+                      <input matInput type="text" formControlName="name">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Primer apellido</mat-label>
+                      <input matInput type="text" formControlName="lastname">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Segundo apellido</mat-label>
+                      <input matInput type="text" formControlName="surname">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Nombre de usuario</mat-label>
+                      <input matInput type="text" formControlName="username">
+                    </mat-form-field>
+                    <p class="mb-3">
+                      Datos de contacto
+                    </p>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Correo electrónico</mat-label>
+                      <input matInput type="email" formControlName="email">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Teléfono</mat-label>
+                      <input matInput type="number" formControlName="phone">
+                    </mat-form-field>
+                    <div class="controls">
+                      <button mat-button class="btn btn-secondary" matStepperNext>Siguiente</button>
+                    </div>
+                  </form>
+                </mat-step>
+                <mat-step [stepControl]="secondFormGroup" label="Información">
+                  <form [formGroup]="secondFormGroup">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Fecha de nacimiento</mat-label>
+                      <input matInput type="date" formControlName="birth_date">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Género</mat-label>
+                      <mat-select formControlName="sex">
+                        <mat-option value="MUJER">Femenino</mat-option>
+                        <mat-option value="HOMBRE">Masculino</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <div class="form-group">
+                      <div class="content-photoPerfil">
+                        <div class="content-photoPerfil-img mb-3" *ngIf="previewImagePath !== null">
+                          <img [src]="previewImagePath" alt="" class="photo-perfil" style="max-width: 50px;">
+                        </div>
+                        <div class="input d-flex justify-content-between">
+                          <span>Subir fotografía</span>
+                          <label for="imgUpload" class="btn-file">Seleccionar imagen</label>
+                          <input accept="image/*" type='file' id="imgUpload" name="imgUpload" class="d-none"
+                            (change)="onFileChange($event)" />
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mb-3">Asignación del colaborador</p>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Seleccione un área</mat-label>
+                      <mat-select formControlName="area_id">
+                        <mat-option *ngFor="let item of listAreas" [value]="item.id">{{ item.area }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Seleccione un puesto</mat-label>
+                      <mat-select formControlName="stall_id">
+                        <mat-option *ngFor="let item of listStalls" [value]="item.id">{{ item.stall }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Seleccione un rol</mat-label>
+                      <mat-select formControlName="role_id">
+                        <mat-option *ngFor="let item of listRoles" [value]="item.id">{{ item.rol }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <div class="controls">
+                      <button mat-button class="btn btn-morado mx-2" matStepperPrevious>Atras</button>
+                      <button mat-button class="btn btn-secondary mx-2" matStepperNext>Siguiente</button>
+                    </div>
+                  </form>
+                </mat-step>
+                <mat-step [stepControl]="thirdFormGroup" label="Adicionales">
+                  <form [formGroup]="thirdFormGroup">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Descripción</mat-label>
+                      <input matInput type="text" formControlName="description">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Seleccione los permisos</mat-label>
+                      <mat-select formControlName="permissions" multiple>
+                        <mat-option *ngFor="let item of listPermissions" [value]="item.id">{{item.permission}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <div class="row">
+                      <div class="col-12">
+                        <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages" [innerHTML]="errorMessages"></small>
+                      </div>
+                    </div>
+                    <div class="controls">
+                      <button mat-button class="btn btn-morado mx-2" matStepperPrevious>Atras</button>
+                      <button mat-button class="btn btn-secondary mx-2" (click)="onSubmit()">Guardar</button>
+                    </div>
+                  </form>
+                </mat-step>
+              </mat-stepper>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cancelar
+    </button>
+  </div>
+</div>

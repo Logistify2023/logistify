@@ -1,0 +1,25 @@
+.mat-dialog-container {
+  padding: 0 !important;
+  overflow: inherit !important;
+}
+
+.mat-dialog-content {
+  max-height: 75vh !important;
+  margin: 0 !important;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ffaa00;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #c48200;
+  }
+}

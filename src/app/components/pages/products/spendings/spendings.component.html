@@ -1,0 +1,102 @@
+<main class="main-content">
+  <div class="container-fluid header_pages">
+    <div class="row">
+      <div class="col-12 col-md-6 ">
+        <h2>Tipos de gastos <span *ngIf="dataDeleted">eliminados</span></h2>
+      </div>
+      <div class="col-12 col-md-6 text-md-end">
+        <button class="btn btn-secondary" (click)="changeDeleteData()" *ngIf="!dataDeleted">
+          Ver Eliminados
+        </button>
+        <button class="btn btn-secondary" (click)="changeDeleteData()" *ngIf="dataDeleted">
+          Ver no eliminados
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid logistify-table tableUsers mt-3">
+    <div class="row">
+      <div class="col-12 p-md-4 logistify-table">
+        <div class="row mb-3">
+          <div class="col-12 col-md-4 form">
+            <div class="input-group">
+              <mat-form-field appearance="outline">
+                <mat-label>Buscar</mat-label>
+                <input matInput (keyup)="applyFilter($event)">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-12 col-md-3 text-end text-md-start">
+            <button class="btn btn-primary w-100" (click)="openModalCreate()" *ngIf="!dataDeleted">
+              <mat-icon aria-hidden="false" aria-label="Agregar nueva" fontIcon="add"></mat-icon> Agregar nuevo
+            </button>
+          </div>
+        </div>
+
+        <div class="mat-elevation-z8" *ngIf="!loading">
+          <table mat-table matSort [dataSource]="dataSource" [class.mat-data-deleted]="dataDeleted">
+            <ng-container matColumnDef="spending">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo de gasto</th>
+              <td mat-cell *matCellDef="let element"> {{element.spending}} </td>
+            </ng-container>
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef> Precio </th>
+              <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+            </ng-container>
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef> Descripción </th>
+              <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+              <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+
+            <!-- Actions -->
+            <ng-container matColumnDef="details">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon fontIcon="info" (click)="openModalDetails(element.id)"></mat-icon>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="update">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon fontIcon="edit" (click)="openModalUpdate(element.id)" *ngIf="!dataDeleted">
+                </mat-icon>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="restore">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon fontIcon="restore_page" (click)="openModalRestore(element.id)" *ngIf="dataDeleted">
+                </mat-icon>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon fontIcon="delete" (click)="openModalDelete(element.id)"></mat-icon>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell">
+                <strong class="p-2 d-block">
+                  No existen elementos para mostrar.</strong>
+              </td>
+            </tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[15, 30, 45]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+          </mat-paginator>
+        </div>
+        <div class="loading" *ngIf="loading">
+          <img src="assets/img/loader.svg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

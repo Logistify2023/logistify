@@ -1,0 +1,177 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body modal-details text-start">
+      <h3 class="titulo">
+        Información
+      </h3>
+      <div class="row">
+        <div class="col-12 ">
+          <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+            <mat-tab label="Detalles">
+              <div class="info" *ngIf="objectDetails">
+                <div class="row info text-start">
+                  <div class="col-12 col-md-6">
+                    <strong> {{ objectDetails.name }} </strong><label class="mb-3"> Nombre</label>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <strong> {{ objectDetails.key }} </strong><label class="mb-3"> Clave de mercancía</label>
+                  </div>
+                  <div class="col-12">
+                    <strong> {{ objectDetails.description }} </strong><label class="mb-3"> Descripción</label>
+                  </div>
+                  <div class="col-6 col-md-4">
+                    <strong> {{ objectDetails.existence }} </strong><label class="mb-3">Existencia</label>
+                  </div>
+                  <div class="col-6 col-md-4">
+                    <strong> {{ objectDetails.existence }} </strong><label class="mb-3"> Existencia</label>
+                  </div>
+                  <div class="col-6 col-md-4">
+                    <strong> {{ objectDetails.high }} </strong><label class="mb-3"> Alto</label>
+                  </div>
+                  <div class="col-6 col-md-4">
+                    <strong> {{ objectDetails.width }} </strong><label class="mb-3"> Ancho </label>
+                  </div>
+                  <div class="col-6 col-md-4">
+                    <strong> {{ objectDetails.long }} </strong><label class="mb-3"> Largo </label>
+                  </div>
+                  <div class="col-6 col-md-4">
+                    <strong> {{ objectDetails.weight }} </strong><label class="mb-3"> Peso </label>
+                  </div>
+                  <div class="col-6 col-md-4">
+                    <strong> {{ objectDetails.type }} </strong><label class="mb-3"> Tipo </label>
+                  </div>
+                  <div class="col-6 col-md-4">
+                    <strong> {{ objectDetails.is_intern }} </strong><label class="mb-3"> ¿Interno? </label>
+                  </div>
+                  <div class="col-6 col-md-4">
+                    <strong> {{ (objectDetails.category) ? objectDetails.category.category : 'N/A' }} </strong><label
+                      class="mb-3"> Categoría </label>
+                  </div>
+                  <div class="col-6 col-md-4">
+                    <strong> {{ (objectDetails.mark) ? objectDetails.mark.brand : 'N/A' }} </strong><label class="mb-3">
+                      Marca </label>
+                  </div>
+                  <div class="col-6 col-md-4">
+                    <strong> {{ (objectDetails.measure_unit) ? objectDetails.measure_unit.measure_unit : '' }}
+                    </strong><label class="mb-3"> Unidad de medida </label>
+                  </div>
+                  <div class="col-6 col-md-4">
+                    <strong> {{ objectDetails.status }} </strong><label class="mb-3"> Estado</label>
+                    <strong> {{ objectDetails.created_at }} </strong><label class="mb-3"> Fecha de creación </label>
+                    <strong> {{ objectDetails.updated_at }} </strong><label class="mb-3"> Fecha de actualizacion
+                    </label>
+                    <strong *ngIf="objectDetails.deleted_at"> {{ objectDetails.deleted_at }} </strong><label
+                      class="mb-3" *ngIf="objectDetails.deleted_at"> Fecha de eliminación </label>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="Ubicaciones">
+              <div *ngIf="objectDetails.locations">
+                <div class="mat-elevation-z8 logistify-table table-delete-false"
+                  *ngIf="objectDetails.locations.length > 0">
+                  <table mat-table matSort class="w-100" [dataSource]="objectDetails.locations">
+                    <ng-container matColumnDef="location">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ubicación</th>
+                      <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="description">
+                      <th mat-header-cell *matHeaderCellDef>Descripción</th>
+                      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columsDetails_Location"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columsDetails_Location;"></tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[15, 30, 45]" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+                  </mat-paginator>
+                </div>
+                <strong class="p-2 d-block" *ngIf="objectDetails.locations.length === 0">
+                  No existen elementos para mostrar.</strong>
+              </div>
+            </mat-tab>
+            <mat-tab label="Gastos">
+              <div *ngIf="objectDetails.expenses">
+                <div class="mat-elevation-z8 logistify-table table-delete-false"
+                  *ngIf="objectDetails.expenses.length > 0">
+                  <table mat-table matSort class="w-100" [dataSource]="objectDetails.expenses">
+                    <ng-container matColumnDef="invoice">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Folio</th>
+                      <td mat-cell *matCellDef="let element"> {{element.invoice}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="date">
+                      <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="amount">
+                      <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+                      <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="total">
+                      <th mat-header-cell *matHeaderCellDef>Total</th>
+                      <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columsDetails_Expenses"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columsDetails_Expenses;"></tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[15, 30, 45]" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+                  </mat-paginator>
+                </div>
+                <strong class="p-2 d-block" *ngIf="objectDetails.expenses.length === 0">
+                  No existen elementos para mostrar.</strong>
+              </div>
+            </mat-tab>
+            <mat-tab label="Gastos">
+              <div *ngIf="objectDetails.supplies">
+                <div class="mat-elevation-z8 logistify-table table-delete-false"
+                  *ngIf="objectDetails.supplies.length > 0">
+                  <table mat-table matSort class="w-100" [dataSource]="objectDetails.supplies">
+                    <ng-container matColumnDef="invoice">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Folio</th>
+                      <td mat-cell *matCellDef="let element"> {{element.invoice}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="date">
+                      <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="amount">
+                      <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+                      <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="total">
+                      <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+                      <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columsDetails_Supplies"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columsDetails_Supplies;"></tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[15, 30, 45]" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+                  </mat-paginator>
+                </div>
+                <strong class="p-2 d-block" *ngIf="objectDetails.supplies.length === 0">
+                  No existen elementos para mostrar.</strong>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cerrar
+    </button>
+  </div>
+</div>

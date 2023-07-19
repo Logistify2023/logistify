@@ -1,0 +1,311 @@
+________________________________________________________________________
+___________GUIAS POR CANCELAR___________________________________________
+________________________________________________________________________
+- ESTAFETA
+  2018674264502602234564	0481056309
+  4018674264502602234563	4030306582	BRONCE COTIZACIÓN	ESTAFETA DÍA SIGUIENTE
+  2058674264502703446005	0178979046	BRONCE COTIZACIÓN	ESTAFETA TERRESTRE
+  8018674264502602234561	4225060154	BRONCE COTIZACIÓN	ESTAFETA DÍA SIGUIENTE
+  4058674264502703446004	0257780464	BRONCE COTIZACIÓN	ESTAFETA TERRESTRE
+  7058674264502703445985	2493507919	BRONCE COTIZACIÓN	ESTAFETA TERRESTRE
+  9058674264502703445984	0673883481	BRONCE COTIZACIÓN	ESTAFETA TERRESTRE
+  1058674264502703445983	0252516090	BRONCE COTIZACIÓN	ESTAFETA TERRESTRE
+  3058674264502703445982	1448800236	BRONCE COTIZACIÓN	ESTAFETA TERRESTRE
+  2018674264502602234540	0704114862	BRONCE COTIZACIÓN	ESTAFETA DÍA SIGUIENTE
+  5018674264502602234539	2058608781	BRONCE COTIZACIÓN	ESTAFETA DÍA SIGUIENTE
+  8058674264502703445975	3483233728	BRONCE COTIZACIÓN	ESTAFETA TERRESTRE
+  0058674264502703445974	0031062870	BRONCE COTIZACIÓN	ESTAFETA TERRESTRE
+  9018674264502602234537	2028566666	BRONCE COTIZACIÓN	ESTAFETA DÍA SIGUIENTE
+  7058674264502703445966	          	BRONCE COTIZACIÓN	ESTAFETA TERRESTRE
+  5018674264502602234534	          	BRONCE COTIZACIÓN	ESTAFETA DÍA SIGUIENTE
+
+- UPS
+  1Z4F18100417858863
+  1Z4F18106608369828
+  1Z4F18100429973822	BRONCE COTIZACIÓN	UPS DÍA SIGUIENTE
+  1Z4F18106602755448	BRONCE COTIZACIÓN	UPS DÍA SIGUIENTE
+  1Z4F18106619225711	BRONCE COTIZACIÓN	UPS DÍA SIGUIENTE
+  1Z4F18106601315906	BRONCE COTIZACIÓN	UPS DÍA SIGUIENTE
+
+- DHL
+  JD014600010782676636  3707963626
+  JD014600010782877251  3153797371
+  JD014600010748483872	7210053874	BRONCE COTIZACIÓN	DHL TERRESTRE
+  JD014600010753684741	7210111075	BRONCE COTIZACIÓN	DHL TERRESTRE
+  JD014600010753684724	7210110946	BRONCE COTIZACIÓN	DHL DÍA SIGUIENTE
+  JD014600010753684704	7210110832	BRONCE COTIZACIÓN	DHL DÍA SIGUIENTE
+  JD014600010752290397	2012755172	BRONCE COTIZACIÓN	DHL DÍA SIGUIENTE
+  JD014600010752290393	2012755135	BRONCE COTIZACIÓN	DHL TERRESTRE
+  JD014600010752290361	2012754855	BRONCE COTIZACIÓN	DHL TERRESTRE
+
+- FEDEX
+  770899558664
+  770885662620
+  770885625820
+  770999125848	770999125848	BRONCE COTIZACIÓN	FEDEX TERRESTRE
+  770934262962	770934262962	BRONCE COTIZACIÓN	FEDEX DÍA SIGUIENTE
+  770934263579	770934263579	BRONCE COTIZACIÓN	FEDEX TERRESTRE
+  770934263373	770934263373	BRONCE COTIZACIÓN	FEDEX TERRESTRE
+  770916892995	770916892995	BRONCE COTIZACIÓN	FEDEX TERRESTRE
+  770916891186	770916891186	BRONCE COTIZACIÓN	FEDEX DÍA SIGUIENTE
+
+- PAQUETE
+  21167415906   MEX01WE0171079	BRONCE COTIZACIÓN	PAQUETEXPRESS TERRESTRE
+  21167415899   MEX01WE0171078	BRONCE COTIZACIÓN	PAQUETEXPRESS TERRESTRE
+  21167415706   MEX01WE0171047	BRONCE COTIZACIÓN	PAQUETEXPRESS TERRESTRE
+  21167415705   MEX01WE0171046	BRONCE COTIZACIÓN	PAQUETEXPRESS TERRESTRE
+  21167415700   MEX01WE0171045	BRONCE COTIZACIÓN	PAQUETEXPRESS TERRESTRE
+  21167415692   MEX01WE0171044	BRONCE COTIZACIÓN	PAQUETEXPRESS TERRESTRE
+  21167415691   MEX01WE0171043	BRONCE COTIZACIÓN	PAQUETEXPRESS TERRESTRE
+  21167415690   MEX01WE0171042	BRONCE COTIZACIÓN	PAQUETEXPRESS TERRESTRE
+  21167415476   MEX01WE0171002	BRONCE COTIZACIÓN	PAQUETEXPRESS TERRESTRE
+  21167415465   MEX01WE0171001	BRONCE COTIZACIÓN	PAQUETEXPRESS TERRESTRE
+  211155589388	MEX01WE8245026	BRONCE COTIZACIÓN	PAQUETEXPRESS TERRESTRE
+  211155523530	MEX01WE8239409	BRONCE COTIZACIÓN	PAQUETEXPRESS TERRESTRE
+  211155523512	MEX01WE8239408	BRONCE COTIZACIÓN	PAQUETEXPRESS TERRESTRE
+  211155343535	MEX01WE8186839	BRONCE COTIZACIÓN	PAQUETEXPRESS TERRESTRE
+  211155343533	MEX01WE8186838	BRONCE COTIZACIÓN	PAQUETEXPRESS TERRESTRE
+________________________________________________________________________________________________________
+________________________________________________________________________________________________________
+Iconos para angular
+https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/
+Angular Charts
+https://ng-charts.netlify.app/
+https://amoelcodigo.com/graficas-angular-ng2charts/#:~:text=Gr%C3%A1ficas%20din%C3%A1micas%20en%20Angular%20con%20ng2-charts%20%28Angular%2C%20Node.js%2C,de%20datos%2C%20y%20como%20backend%20Node.Js%20con%20Express.
+________________________________________________________________________________________________________
+________________________________________________________________________________________________________
+______________________________________MODULOS_REVISADOS_OK______________________________________________
+________________________________________________________________________________________________________
+________________________________________________________________________________________________________
+CATEGORIA           MODULO      SUBMODULOS              BACK | FRONT
+
+MI PROFILE
+    => MÓDULO DE NOTIFICACIONES
+        - Todas                                         OK  |   OK
+        - Leídas                                        OK  |   OK
+        - No leídas                                     OK  |   OK
+        - Marcar una leída                              OK  |   OK
+        - Marcar todas leídas                           OK  |   OK
+    => MÓDULO DE MIS COTIZACIONES
+        - Cotizaciones normales
+            - index                                     OK  |   OK
+            - store                                     => Falta implementar el select de productos del cliente
+            - show                                      OK  |   OK
+            - update                                    OK  |   No se ha implementado
+            - delete                                    OK  |   OK
+            - download_pdf                              => Algunos PDF´s los descarga pero no se logran abrir |   OK
+        - Cotizaciones masivas
+            - index                                     OK  |   OK
+            - store                                     OK  |   OK
+            - show                                      OK  |   OK
+            - show_shipments                            OK  |   OK
+            - cancel_massive                            OK  |   OK
+            - update                                    => Esta función no se ha desarrollado
+            - delete                                    OK  |   OK
+    => MÓDULO DE ENVÍOS
+        - Envíos normales
+            - index                                     OK  |   OK
+            - store                                     => Falta implementar el select de productos del cliente
+            - show                                      OK  |   OK
+            - view_guide                                OK  |   OK
+            - view_erros                                => Falta ver información del envío de porque no se generada(payload) ESO EN ADMIN
+            - download_guide                            OK  |   OK
+            - download_pdf                              OK  |   OK
+            - cancel                                    OK  |   OK
+            - delete                                    OK  |   OK
+        - Envíos masivos
+            - index                                     OK  |   OK
+            - show                                      OK  |   OK
+            - update                                    => Esta funcíon no se ha desarrollado
+            - show_shipments                            OK  |   OK
+            - cancel_massive                            OK  |   OK
+            - download_pdf                              OK  |   OK
+            - download_zip                              OK  |   OK
+            - delete                                    OK  |   OK
+    => MÓDULO DE DASHBOARD(TABLERO)
+        - GetGuides                                     In process - pending issue
+        - Get Master                                    In process - pending issue
+        - Get Shipments                                 In process - pending issue
+    => ME PROFILE
+        - MeProfile                                     OK  |   OK
+        - MeProfileClient                               RevisarInFrontAndImplement
+        - MeImage                                       OK  |   Ok
+        - MePermissions                                 OK  |   OK
+        - UpdateProfile                                 OK  |   OK
+        - UpdateProfileClient                           RevisarInFrontAndImplement
+        - UpdateImage                                   OK  |   OK
+        - MeLosses                                      RevisarInFrontAndImplement
+        - MeCustomers                                   OK  |   OK
+        - Revok                                         OK  |   OK
+        - SingOut                                       OK  |   OK
+        - IsAuthenticaded                               OK  |   RevisarInFrontAndImplement
+
+RASTREO ENVIOS
+    => TRACKING
+        - index                                         OK  |   OK
+        - store                                         OK  |   OK
+        - show                                          OK  |   OK
+
+ENVÍOS
+    => MÓDULO DE ENVÍOS
+
+    => MÓDULO DE ENVIOS MASIVOS
+
+    => MÓDULO DE COTIZACIONES
+
+    => MÓDULO DE COTIZACIONES MASIVAS
+
+    => MÓDULO DE ESTADOS
+
+    => MÓDULO DE RECLAMACIONES
+
+    => MÓDULO DE EVENTOS
+
+    => MÓDULO DE TIEMPOS DE ENTREGA
+
+    => MÓDULO DE TIPOS DE INCIDENCIAS
+
+    => MÓDULO DE INCIDENCIAS
+
+COLABORADORES
+    => MÓDULO DE COLABORADORES
+        - index                                             OK  |   OK
+        - show                                              OK  |   OK
+        - store                                             OK  |   OK
+        - update                                            OK  |   OK
+        - delete                                            OK  |   OK
+        - admin-index                                       OK  |   OK
+        - admin-show                                        OK  |   OK
+        - admin-update                                      OK  |   OK
+        - admin-delete                                      OK  |   OK
+    => MÓDULO DE ÁREAS
+        - index                                             OK  |   OK
+        - show                                              OK  |   OK
+        - store                                             OK  |   OK
+        - update                                            OK  |   OK
+        - delete                                            OK  |   OK
+        - admin-index                                       OK  |   OK
+        - admin-show                                        OK  |   OK
+        - admin-update                                      OK  |   OK
+        - admin-delete                                      OK  |   OK
+    => MÓDULO DE PUESTOS
+        - index                                             OK  |   OK
+        - show                                              OK  |   OK
+        - store                                             OK  |   OK
+        - update                                            OK  |   OK
+        - delete                                            OK  |   OK
+        - admin-index                                       OK  |   OK
+        - admin-show                                        OK  |   OK
+        - admin-update                                      OK  |   OK
+        - admin-delete                                      OK  |   OK
+    => MÓDULO DE ROLES
+        - index                                             OK  |   OK
+        - show                                              OK  |   OK
+        - store                                             OK  |   OK
+        - update                                            OK  |   OK
+        - delete                                            OK  |   OK
+        - admin-index                                       OK  |   OK
+        - admin-show                                        OK  |   OK
+        - admin-update                                      OK  |   OK
+        - admin-delete                                      OK  |   OK
+    => MÓDULO DE PERMISOS
+        - index                                             OK  |   OK
+        - show                                              OK  |   OK
+        - store                                             OK  |   OK
+        - update                                            OK  |   OK
+        - delete                                            OK  |   OK
+        - admin-index                                       OK  |   OK
+        - admin-show                                        OK  |   OK
+        - admin-update                                      OK  |   OK
+        - admin-delete                                      OK  |   OK
+    => MÓDULO DE CLASIFICACIONES
+        - index                                             OK  |   OK
+        - show                                              OK  |   OK
+        - store                                             OK  |   OK
+        - update                                            OK  |   OK
+        - delete                                            OK  |   OK
+        - admin-index                                       OK  |   OK
+        - admin-show                                        OK  |   OK
+        - admin-update                                      OK  |   OK
+        - admin-delete                                      OK  |   OK
+
+CLIENTES
+    => MÓDULO DE CLIENTES
+
+    => MÓDULO DE PERFILES DE VENTA
+
+    => MÓDULO DE TIPOS DE CLIENTES
+
+    => MÓDULO DE CONTACTOS
+
+    => MÓDULO DE GIROS
+
+MENSAJERÍAS
+    => MÓDULO DE MENSAJERÍAS
+
+    => MÓDULO DE TIPOS DE MENSAJERÍAS
+
+    => MÓDULO DE CATALOGOS DE PRODUCTOS
+
+    => MÓDULO DE TIPOS DE PRODUCTOS
+
+    => MÓDULO DE TIPOS DE PRECIOS
+
+    => MÓDULO DE CARGOS ADICIONALES
+
+    => MÓDULO DE TIPOS DE CARGOS ADICIONALES
+
+    => MÓDULO DE SERVICIOS WEB
+
+    => MÓDULO DE DIAS DE ENTREGA
+
+MERCANCÍAS
+    => MÓDULO DE MERCANCIAS
+
+    => MÓDULO DE MARCAS
+
+    => MÓDULO DE CATEGORIAS
+
+    => MÓDULO DE UNIDADES DE MEDIDA
+
+    => MÓDULO DE UBICACIONES
+
+    => MÓDULO DE PERDIDAS
+
+    => MÓDULO DE PROVEEDORES
+
+    => MÓDULO DE GASTOS
+
+    => MÓDULO DE TIPOS DE GASTOS
+
+    => MÓDULO DE INSUMOS
+
+CONFIGURACIONES
+    => MÓDULO DE DIRECCIONES
+        - index                                             OK  |   OK
+        - store                                             OK  |   OK
+        - import                                            OK  |   OK
+        - filters                                           OK  |   OK
+        - show                                              OK  |   OK
+        - delete                                            OK  |   OK
+    => MÓDULO DE COMBUSTIBLES
+        - index                                             OK  |   OK
+        - update                                            OK  |   OK
+    => MÓDULO DE GRUPOS PRODUCTOS
+        - index                                             OK  |   OK
+        - show                                              OK  |   OK
+        - update origin                                     OK  |   OK
+        - update destin                                     OK  |   OK
+    => MÓDULO DE COTIZADOR SEGURO
+        - index                                             OK  |   OK
+        - store                                             OK  |   OK
+        - clear                                             OK  |   OK
+
+AUDITORIAS
+    => MÓDULO DE AUDITORIAS DE CLIENTES
+    => MÓDULO DE AUDITORIAS DE MENSAJERÍAS
+
+________________________________________________________________________________________________________
+________________________________________________________________________________________________________
+________________________________________________________________________________________________________
+________________________________________________________________________________________________________

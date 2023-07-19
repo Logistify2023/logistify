@@ -1,0 +1,257 @@
+<main class="main-content">
+  <div class="container-fluid header_pages">
+    <div class="row">
+      <div class="col-12 col-md-6 ">
+        <h2>Mercancías <span *ngIf="dataDeleted">eliminados</span></h2>
+      </div>
+      <div class="col-12 col-md-6 text-md-end">
+        <button class="btn btn-secondary" (click)="changeDeleteData()" *ngIf="!dataDeleted">
+          Ver Eliminadas
+        </button>
+        <button class="btn btn-secondary" (click)="changeDeleteData()" *ngIf="dataDeleted">
+          Ver no eliminadas
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid logistify-table tableUsers mt-3">
+    <div class="row">
+      <div class="col-12 p-md-4 logistify-table">
+        <div class="row mb-3">
+          <div class="col-12 col-md-4 form">
+            <div class="input-group">
+              <mat-form-field appearance="outline">
+                <mat-label>Buscar</mat-label>
+                <input matInput (keyup)="applyFilter($event)">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-12 col-md-3 text-end text-md-start">
+            <button class="btn btn-primary w-100" (click)="openModalCreate()" *ngIf="!dataDeleted">
+              <mat-icon aria-hidden="false" aria-label="Agregar nueva" fontIcon="add"></mat-icon> Agregar nuevo
+            </button>
+          </div>
+        </div>
+
+        <div class="mat-elevation-z8" *ngIf="!loading">
+          <table mat-table matSort [dataSource]="dataSource" [class.mat-data-deleted]="dataDeleted">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="key">
+              <th mat-header-cell *matHeaderCellDef> Clave </th>
+              <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+            </ng-container>
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef> Tipo </th>
+              <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+            </ng-container>
+            <ng-container matColumnDef="existence">
+              <th mat-header-cell *matHeaderCellDef> Existencia </th>
+              <td mat-cell *matCellDef="let element"> {{element.existence}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+              <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+
+            <!-- Actions -->
+            <ng-container matColumnDef="details">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon fontIcon="info" (click)="openModalDetails(element.id)"></mat-icon>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="update">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon fontIcon="edit" (click)="openModalUpdate(element.id)" *ngIf="!dataDeleted">
+                </mat-icon>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="restore">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon fontIcon="restore_page" (click)="openModalRestore(element.id)" *ngIf="dataDeleted">
+                </mat-icon>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon fontIcon="delete" (click)="openModalDelete(element.id)"></mat-icon>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell">
+                <strong class="p-2 d-block">
+                  No existen elementos para mostrar.</strong>
+              </td>
+            </tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[15, 30, 45]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+          </mat-paginator>
+        </div>
+        <div class="loading" *ngIf="loading">
+          <img src="assets/img/loader.svg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+
+<!--
+
+
+<div class="modal fade modal-general" id="modalUpdate" tabindex="-1" role="dialog" data-backdrop="static"
+  data-keyboard="false">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <mat-dialog-content class="mat-typography modal-body">
+        <h3 class="titulo">
+          Actualizar tipo de cliente
+        </h3>
+        <h4>
+          Completa los datos para actualizar el tipo de cliente
+        </h4>
+        <form [formGroup]="updateForm" class="form form-step" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-12 col-md-4">
+              <mat-form-field appearance="outline">
+                <input matInput type="text" placeholder="Producto" formControlName="name"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('name')?.errors }">
+                <ul class="autocomplete-items">
+                  <li *ngFor="let i of filteredOptionsUp | async" (click)="selectedProductUpdate(i)">
+                    {{ i.descripcion_producto }}
+                  </li>
+                </ul>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <input matInput type="text" placeholder="Clave del producto" formControlName="key"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('key')?.errors }">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Descripción</mat-label>
+                <input matInput type="text" formControlName="description"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('description')?.errors }">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <input matInput type="text" placeholder="Existencia" formControlName="existence"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('existence')?.errors }">
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="row">
+                <div class="col-6">
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" placeholder="Alto" formControlName="high"
+                      [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('high')?.errors }">
+                  </div>
+                </div>
+                <div class="col-6 ">
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" placeholder="Ancho" formControlName="width"
+                      [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('width')?.errors }">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 ">
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" placeholder="Largo" formControlName="long"
+                      [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('long')?.errors }">
+                  </div>
+                </div>
+                <div class="col-6 ">
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" placeholder="Peso" formControlName="weight"
+                      [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('weight')?.errors }">
+                  </div>
+                </div>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <select nice-select class="form-control w-100 custom-select nice-select" formControlName="type"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('type')?.errors }">
+                  <option value="" disabled selected>Tipo de producto</option>
+                  <option value="SOBRE">SOBRE</option>
+                  <option value="PAQUETE">PAQUETE</option>
+                  <option value="PALLET">PALLET</option>
+                </select>
+              </div>
+
+              <mat-form-field appearance="outline">
+                <select nice-select class="form-control w-100 custom-select nice-select" formControlName="category_id"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('category_id')?.errors }">
+                  <option value="" disabled selected>Categoría</option>
+                  <option *ngFor="let item of listCategories" [value]="item.id">
+                    {{ item.category }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <mat-form-field appearance="outline">
+                <select nice-select class="form-control w-100 custom-select nice-select" formControlName="mark_id"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('mark_id')?.errors }">
+                  <option value="" disabled selected>Marca</option>
+                  <option *ngFor="let item of listBrands" [value]="item.id">
+                    {{ item.brand }}
+                  </option>
+                </select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <select nice-select class="form-control w-100 custom-select nice-select"
+                  formControlName="measure_unit_id"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('measure_unit_id')?.errors }">
+                  <option value="" disabled selected>Unidad de medida</option>
+                  <option *ngFor="let item of listMeasureUnits" [value]="item.id">
+                    {{ item.measure_unit }}
+                  </option>
+                </select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <!--<ng-multiselect-dropdown class="form-control multiselect nice-select" [placeholder]="'Ubicación'"
+                  [data]="listLocations" formControlName="locations" [settings]="dropdownSettings">
+                </ng-multiselect-dropdown>--.>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="1" id="is_intern_create"
+                    formControlName="is_intern">
+                  <label class="form-check-label" for="is_intern_create">
+                    ¿Es interno?
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages"
+                [innerHTML]="errorMessages | safeHtml"></small>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button type="submit" class="btn btn-secondary mt-3 mx-2">
+              Actualizar
+            </button>
+          </div>
+        </form>
+      </mat-dialog-content>
+      <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+        Cancelar
+      </button>
+    </div>
+    --.>
+</div>
+</div>
+-->

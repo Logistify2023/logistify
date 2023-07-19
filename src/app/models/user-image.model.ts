@@ -1,0 +1,17 @@
+export interface Image {
+  id: number,
+  url: string,
+  src: string,
+  image: any,
+  temporary_link: string,
+  name: string,
+  slug: string,
+  description: string,
+  is_local: boolean,
+  type: string,
+  imageable_type: string,
+  imageable_id: number,
+  deleted_at: string,
+  created_at: string,
+  updated_at: string,
+}

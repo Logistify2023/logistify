@@ -1,0 +1,127 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body">
+      <h3 class="titulo"> Actualizar </h3>
+      <div class="form form-step">
+        <div class="pasos current" data-step="step-1">
+          <form class="row" [formGroup]="firstFormGroup">
+            <div class="col-12">
+              <h4 class="title mb-2"> Datos de la empresa </h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Empresa</mat-label>
+                    <input matInput formControlName="business_name">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>RFC</mat-label>
+                    <input matInput formControlName="rfc" (focusout)="validateRFC()">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <h4 class="title mb-2"> Datos de contacto </h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="name">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Primer Apellido</mat-label>
+                    <input matInput formControlName="surname">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Segundo Apellido</mat-label>
+                    <input matInput formControlName="lastname">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Correo electrónico</mat-label>
+                    <input matInput formControlName="email">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Teléfono personal</mat-label>
+                    <input matInput formControlName="phone">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Ejecutivo asignado</mat-label>
+                    <mat-select formControlName="executive">
+                      <mat-option *ngFor="let item of listExecutives" [value]="item.id">
+                        {{ item.name }} {{ item.lastname }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div> 
+              </div>                
+            </div>
+            <div class="col-12">
+              <h4 class="title mb-2">Datos cliente</h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Giro de la empresa</mat-label>
+                    <mat-select formControlName="turn_id">
+                      <mat-option *ngFor="let item of listTurns" [value]="item.id">
+                        {{ item.turn }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Tipo de cliente</mat-label>
+                    <mat-select formControlName="customer_type_id">
+                      <mat-option *ngFor="let item of listCustomerTypes" [value]="item.id">
+                        {{ item.customer_type }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Tipo de persona</mat-label>
+                    <mat-select formControlName="type_custumer">
+                      <mat-option value="FISICA">Física</mat-option>
+                      <mat-option value="MORAL">Moral</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Perfil</mat-label>
+                    <mat-select formControlName="profile_id">
+                      <mat-option *ngFor="let item of listProfiles" [value]="item.id">
+                        {{ item.profile }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Descripción</mat-label>
+                    <input matInput formControlName="description">
+                  </mat-form-field>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="true" id="can_enable_u"
+                      formControlName="status">
+                    <label class="form-check-label" for="can_enable_u">
+                      ¿Está Disponible?
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages" [innerHTML]="errorMessages"></small>
+              </div>
+            </div>
+            <div class="controls">
+              <button mat-button class="btn btn-secondary mx-2" (click)="onSubmit()"> Guardar </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close> Cancelar </button>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<main fxLayout="row" fxLayoutAlign="space-around center">
+  <section class="login col-10 col-md-4">
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <h2>Bienvenido a <br />
+        <img src="assets/img/logistify/logo.svg">
+      </h2>
+      <mat-form-field appearance="outline">
+        <mat-label>Correo electrónico</mat-label>
+        <input matInput placeholder="Correo electrónico" [(ngModel)]="username" name="username" required email>
+        <mat-error> Por favor ingrese su dirección de correo electrónico válida </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input matInput placeholder="Contraseña" [type]="hidePassword ? 'password' : 'text' " [(ngModel)]="password" name="password" required>
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error> Ingrese una contraseña válida </mat-error>
+      </mat-form-field>
+      <button type="submit" class="mb-1" mat-raised-button color="primary" *ngIf="!loginSubmitted" [disabled]="!loginForm.form.valid"> Iniciar sesión </button>
+      <mat-spinner class="m-auto" [diameter]="50" *ngIf="loginSubmitted"></mat-spinner>
+    </form>
+    <div class="login-legals text-center mt-3">
+      <p> ¿Olvidaste tu contraseña? <a [routerLink]="['/recovery-password']">Recuperar</a> </p>
+      <p> Al ingresar confirmas que aceptas nuestros <a [routerLink]="['/terms']">Términos y Políticas.</a> </p>
+      <p class="text-center"> ¿Aún no tienes cuenta? <a [routerLink]="['/contact-us']">Contáctenos</a> </p>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,167 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body">
+      <h3 class="titulo"> Nuevo </h3>
+      <h4> Completa los datos para agregar uno nuevo </h4>
+      <div class="form form-step">
+        <div class="pasos current" data-step="step-1">
+          <mat-stepper [linear]="true" #stepper>
+            <mat-step [stepControl]="firstFormGroup" label="Información">
+              <form class="row" [formGroup]="firstFormGroup">
+                <div class="col-12 col-md-6">
+                  <h4 class="title mb-3"> Datos de la empresa </h4>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Empresa</mat-label>
+                    <input matInput formControlName="business_name">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>RFC</mat-label>
+                    <input matInput formControlName="rfc" (focusout)="validateRFC()">
+                  </mat-form-field>
+                </div>
+                <div class="col-12 col-md-6">
+                  <h4 class="title mb-3"> Datos de contacto </h4>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="name">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Primer Apellido</mat-label>
+                    <input matInput formControlName="surname">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Segundo Apellido</mat-label>
+                    <input matInput formControlName="lastname">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Correo electrónico</mat-label>
+                    <input matInput type="email" formControlName="email">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Teléfono personal</mat-label>
+                    <input matInput minlength="10" maxlength="10" formControlName="phone">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Género</mat-label>
+                    <mat-select formControlName="sex">
+                      <mat-option value="MUJER">Femenino</mat-option>
+                      <mat-option value="HOMBRE">Masculino</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Ejecutivo asignado</mat-label>
+                    <mat-select formControlName="executive">
+                      <mat-option *ngFor="let item of listExecutives" [value]="item.id">
+                        {{ item.name }} {{ item.lastname }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="controls">
+                  <button mat-button class="btn btn-secondary" matStepperNext>Siguiente</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="secondFormGroup" label="Datos de contacto">
+              <form class="row" [formGroup]="secondFormGroup">
+                <div class="col-12 col-md-6">
+                  <h4 class="title mb-3"> Sobre el cliente </h4>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Giro de la empresa</mat-label>
+                    <mat-select formControlName="turn_id">
+                      <mat-option *ngFor="let item of listTurns" [value]="item.id"> {{ item.turn }} </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Tipo de cliente</mat-label>
+                    <mat-select formControlName="customer_type_id">
+                      <mat-option *ngFor="let item of listCustomerTypes" [value]="item.id"> {{ item.customer_type }} </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Tipo de persona</mat-label>
+                    <mat-select formControlName="type_custumer">
+                      <mat-option value="FISICA">Física</mat-option>
+                      <mat-option value="MORAL">Moral</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Perfil</mat-label>
+                    <mat-select formControlName="profile_id">
+                      <mat-option *ngFor="let item of listProfiles" [value]="item.id">
+                        {{ item.profile }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Descripción</mat-label>
+                    <input matInput formControlName="description">
+                  </mat-form-field>
+                </div>
+                <div class="col-12 col-md-6">
+                  <h4 class="title mb-3">
+                    Dirección principal
+                  </h4>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Calle</mat-label>
+                    <input matInput formControlName="street">
+                  </mat-form-field>
+                  <div class="row">
+                    <div class="col-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>No. Ext.</mat-label>
+                        <input matInput formControlName="outdoor_number">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>No. Int.</mat-label>
+                        <input matInput formControlName="interior_number">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Referencias</mat-label>
+                    <input matInput formControlName="reference">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>C.P.</mat-label>
+                    <input matInput minlength="5" maxlength="5" formControlName="postal_code" (change)="validateCP()">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Estado</mat-label>
+                    <input matInput formControlName="state" readonly>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Ciudad</mat-label>
+                    <input matInput formControlName="city" readonly>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Municipio</mat-label>
+                    <input matInput formControlName="municipality" readonly>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Colonia</mat-label>
+                    <mat-select formControlName="suburb">
+                      <mat-option *ngFor="let item of listSettlement" [value]="item.settlement"> {{ item.settlement }} </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages" [innerHTML]="errorMessages"></small>
+                  </div>
+                </div>
+                <div class="controls">
+                  <button mat-button class="btn btn-morado mx-2" matStepperPrevious>Atras</button>
+                  <button mat-button class="btn btn-secondary mx-2" (click)="onSubmit()">Guardar</button>
+                </div>
+              </form>
+            </mat-step>
+          </mat-stepper>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close> Cancelar </button>
+  </div>
+</div>

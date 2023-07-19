@@ -1,0 +1,60 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body">
+      <h3 class="titulo"> Actualizar </h3>
+      <form [formGroup]="updateForm" class="form form-step" (ngSubmit)="onSubmit()">
+        <div class="pasos current" data-step="step-1">
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Identificador</mat-label>
+                <input matInput formControlName="branch_office">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Contacto</mat-label>
+                <input matInput formControlName="contact">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Empresa</mat-label>
+                <input matInput formControlName="business">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Puesto</mat-label>
+                <input matInput formControlName="stall">
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>RFC</mat-label>
+                <input matInput formControlName="rfc">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Teléfono</mat-label>
+                <input matInput minlength="10" maxlength="10" formControlName="phone">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput type="email" formControlName="email">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Cliente</mat-label>
+                <mat-select formControlName="customer_id">
+                  <mat-option *ngFor="let item of listCustomers" [value]="item.id"> {{ item.business_name }} </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages" [innerHTML]="errorMessages"></small>
+          </div>
+        </div>
+        <div class="controls">
+          <button type="submit" class="btn btn-secondary w-100 mt-3"> Actualizar </button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close> Cancelar </button>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<main class="login restorePass" fxLayout="row" fxLayoutAlign="space-around center">
+  <section class="container login">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-md-8">
+        <h2 class="w-100 mb3"> Contáctenos </h2>
+        <form class="login-form" #restoreForm="ngForm" (ngSubmit)="onSubmit()">
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Correo electrónico</mat-label>
+              <input matInput placeholder="Correo electrónico" [(ngModel)]="email" name="email" required email>
+              <mat-error> Por favor ingrese su dirección de correo electrónico válida </mat-error>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Nombre completo</mat-label>
+              <input matInput placeholder="Nombre completo" [(ngModel)]="name" name="name" required>
+              <mat-error> Por favor ingrese su nombre completo </mat-error>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Teléfono</mat-label>
+              <input matInput placeholder="Telefono" [(ngModel)]="phone" name="phone" required>
+              <mat-error> Por favor ingrese su número telefónico </mat-error>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Asunto</mat-label>
+              <input matInput placeholder="Asunto" [(ngModel)]="asunto" name="asunto" required>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Mensaje</mat-label>
+              <textarea matInput rows="10" [(ngModel)]="message" name="message" required></textarea>
+            </mat-form-field>
+          </p>
+          <div class="row center mb3">
+            <button type="submit" mat-raised-button color="primary" *ngIf="!submitted" [disabled]="!restoreForm.form.valid"> Enviar </button>
+            <mat-spinner class="m-auto" [diameter]="50" *ngIf="submitted"></mat-spinner>
+          </div>
+          <a [routerLink]="['/login']" class="btn btn-link"> Cancelar </a>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>

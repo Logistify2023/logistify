@@ -1,0 +1,15 @@
+.logistify{
+	.app-sidebar{
+		margin: 0;
+		border: 0;
+		border-radius: 0;
+		transition: all ease .5s;
+		top: 68px;
+		background-color:#3c3838;
+	}
+	@media #{$md}{
+		.app-sidebar{
+			top: 0;
+		}
+	}
+}

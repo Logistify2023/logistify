@@ -1,0 +1,77 @@
+<main class="main-content">
+  <div class="container-fluid header_pages">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <h2>Listado de mensajerías <span *ngIf="dataDeleted">eliminadas</span></h2>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12 text-md-end" *appHaveAccess="'admin.courier.index'">
+        <button class="btn btn-secondary" (click)="changeDeleteData()" *ngIf="!dataDeleted"> Mensajerías eliminadas </button>
+        <button class="btn btn-secondary" (click)="changeDeleteData()" *ngIf="dataDeleted"> Listado mensajerías </button>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid logistify-table tableUsers mt-3">
+    <div class="row">
+      <div class="col-12 p-md-4 logistify-table">
+        <div class="row mb-3">
+          <div class="col-lg-8 col-md-8 col-sm-12 form">
+            <div class="input-group">
+              <mat-form-field appearance="outline">
+                <mat-label>Buscar una mensajería</mat-label>
+                <input matInput (keyup)="applyFilter($event)">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+          <div *appHaveAccess="'courier.store'" class="col-lg-4 col-md-4 col-sm-12 text-end text-md-start">
+            <button class="btn btn-primary w-100" (click)="openModalCreate()" *ngIf="!dataDeleted">
+              <mat-icon aria-hidden="false" aria-label="Agregar nueva" fontIcon="add"></mat-icon> Agregar mensajería
+            </button>
+          </div>
+        </div>
+        <div class="row grid-cards d-flex align-items-stretch" *ngIf="!loading && listData.length > 0">
+          <div class="col-12 col-md-4 mb-4" *ngFor="let item of listData">
+            <div class="card">
+              <div class="row mt-2">
+                <div class="col-4">
+                  <img src="{{item.image_url}}" alt="" class="w-40 img-fluid">
+                </div>
+                <div class="col-8">
+                  <p><button class="btn btn-link" (click)="openModalDetails(item.id)">{{ item.courier }}</button>
+                    <br />{{ item.description }}
+                  </p>
+                  <p> T: {{ item.phone }} <br /> M: {{ item.email }} </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4"> <strong class="status mx-2">{{ item.status }}</strong> </div>
+                <div class="col-8">
+                  <section *appHaveAccess="'courier.update'">
+                    <a *ngIf="!dataDeleted" class="btn btn-link" (click)="openModalUpdate(item.id)" title="Editar">
+                      <i class="bi bi-pencil-square"></i> Editar</a>
+                  </section>
+                  <section *appHaveAccess="'admin.courier.restore'">
+                    <a *ngIf="dataDeleted" class="btn btn-link" (click)="openModalRestore(item.id)" title="Restaurar">
+                      <i class="bi bi-pencil-square"></i> Restaurar</a>
+                  </section>
+                  <a *appHaveAccess="'courier.destroy'" class="btn btn-link" (click)="openModalDelete(item.id)" title="Eliminar">
+                    <i class="bi bi-trash3"></i> Eliminar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="listData.length <= 0 && !loading">
+          <div class="mat-cell text-center">
+            <strong class="p-2"> {{ messageEmpty }} </strong>
+          </div>
+        </div>
+        
+        <div class="loading" *ngIf="loading">
+          <img width="45%" height="45%" src="assets/img/loader.svg">
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>

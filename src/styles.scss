@@ -1,0 +1,68 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// MEDIA QUERY
+
+// Small devices (landscape phones, 576px and up)
+$sm: "(min-width: 576px)";
+// Medium devices (tablets, 768px and up)
+$md: "(min-width: 768px)";
+// Large devices (desktops, 992px and up)
+$lg: "(min-width: 992px)";
+// Extra large devices (large desktops, 1200px and up)
+$xl: "(min-width: 1200px)";
+
+// fonts
+$font-family: 'Lato', Helvetica, sans-serif;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-heavy: 700;
+$font-height: 1.5;
+
+// colors
+$dark-gray: #333447;
+$blanco: #ffffff;
+$morado: #3F1B8E;
+$amarillo: #FEB92D;
+$text: #29344B;
+$moradoClaro: #E9E5F2;
+$moradoMedio: #633FA4;
+$rojo: #EC0C27;
+$verde: #20A04C;
+$gris: #e8e8e8;
+$grisTablas: #E0E0E0;
+
+mat-grid-tile {
+  background: lightblue;
+}
+
+/* General */
+@import './assets/scss/general/all.scss';
+@import './assets/scss/general.scss';
+@import './assets/scss/general/buttons.scss';
+@import './assets/scss/general/snackBar.scss';
+@import './assets/scss/general/forms.scss';
+@import './assets/scss/general/dialog.scss';
+
+/* Login */
+@import './assets/scss/login/login';
+@import './assets/scss/login/header.scss';
+
+/* Perfil / Usuarios */
+@import './assets/scss/profile/all';
+
+/* General */
+@import './assets/scss/general/logistify-Tablas';
+@import './assets/scss/general/logistify-Modals.scss';

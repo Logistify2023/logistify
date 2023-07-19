@@ -1,0 +1,113 @@
+app-login,
+app-restore-password,
+app-reset-password,
+restorePass,
+app-terms,
+app-contact-us {
+  main {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    background: url('../../img/logistify/bg-logistify.svg') $morado;
+    background-size: cover;
+    background-position: center;
+
+    h2 {
+      color: white;
+    }
+
+    p {
+      font-size: 14px;
+      font-family: Lato, sans-serif;
+      font-weight: 700;
+      color: white;
+
+      strong {
+        color: white;
+      }
+
+      a {
+        font-weight: bold;
+      }
+    }
+
+    .login {
+      text-align: center;
+      color: white;
+
+      form {
+        color: white;
+
+        h2 {
+          margin-bottom: 4em;
+        }
+
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+          transition: background-color 5000s ease-in-out 0s;
+          -webkit-text-fill-color: #FFF !important;
+        }
+
+        .mat-form-field {
+          &.mat-focused {
+            .mat-form-field-label {
+              color: white;
+            }
+          }
+        }
+
+        /*mat-form-field {
+          margin-bottom: 1em;
+          width: 100%;
+          display: block;
+
+          .mat-form-field-label {
+            color: white;
+          }
+
+          input:-webkit-autofill,
+          input:-webkit-autofill:hover,
+          input:-webkit-autofill:focus,
+          input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+            transition: background-color 5000s ease-in-out 0s;
+          }
+
+          .mat-form-field-underline {
+            background-color: white;
+          }
+
+          input {
+            padding: 10px 10px 5px 10px;
+            font-size: 20px;
+            box-sizing: border-box;
+
+            &:focus,
+            :-webkit-autofill,
+            :-webkit-autofill:focus {
+              box-shadow: 0 0 0 1px red;
+            }
+
+            &:-webkit-autofill {
+              -webkit-text-fill-color: white !important;
+            }
+
+            .mat-form-field-underline {
+              background-color: white;
+            }
+          }
+
+        }*/
+      }
+
+      .btn-link {
+        color: #FFF !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body modal-details text-start">
+      <h3 class="titulo">
+        Información
+      </h3>
+      <div class="row">
+        <div class="col-12 ">
+          <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+            <mat-tab label="Detalles">
+              <div class="info" *ngIf="objectDetails">
+                <strong> {{ objectDetails.price }} </strong><label class="mb-3"> Precio</label>
+                <strong> {{ objectDetails.amount }} </strong><label class="mb-3"> Monto</label>
+                <strong> {{ objectDetails.description }} </strong><label class="mb-3"> Descripción</label>
+                <strong> {{ objectDetails.status }} </strong><label class="mb-3"> Estado</label>
+
+                <strong> {{ objectDetails.created_at }} </strong><label class="mb-3"> Fecha de creación </label>
+                <strong> {{ objectDetails.updated_at }} </strong><label class="mb-3"> Fecha de actualizacion
+                </label>
+                <strong *ngIf="objectDetails.deleted_at"> {{ objectDetails.deleted_at }} </strong><label class="mb-3"
+                  *ngIf="objectDetails.deleted_at"> Fecha de eliminación </label>
+              </div>
+            </mat-tab>
+            <mat-tab label="Mercancías">
+              <div class="info" *ngIf="objectDetails.product">
+                <strong> {{ objectDetails.product.name }} </strong><label class="mb-3"> Mercancía</label>
+                <strong> {{ objectDetails.product.description }} </strong><label class="mb-3"> Descripción</label>
+                <strong> {{ objectDetails.product.key }} </strong><label class="mb-3"> Clave</label>
+                <strong> {{ objectDetails.product.existence }} </strong><label class="mb-3"> Existencia</label>
+                <strong> {{ objectDetails.product.type }} </strong><label class="mb-3"> Tipo</label>
+                <strong> {{ objectDetails.product.status }} </strong><label class="mb-3"> Estado</label>
+              </div>
+            </mat-tab>
+            <mat-tab label="Usuario">
+              <div class="info" *ngIf="objectDetails.user">
+                <strong> {{ objectDetails.user.name }} {{ objectDetails.user.surname }} {{
+                  objectDetails.user.lastname
+                  }} </strong><label class="mb-3"> Nombre</label>
+                <strong> {{ objectDetails.user.email }} </strong><label class="mb-3"> Correo electrónico</label>
+                <strong> {{ objectDetails.user.phone_number }} </strong><label class="mb-3"> Teléfono</label>
+                <strong> {{ objectDetails.user.username }} </strong><label class="mb-3"> Username</label>
+                <strong> {{ objectDetails.user.status }} </strong><label class="mb-3"> Estado</label>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cerrar
+    </button>
+  </div>
+</div>

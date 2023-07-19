@@ -1,0 +1,147 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body">
+      <h3 class="titulo"> Agregar dirección </h3>
+      <div class="row col-12">
+        <mat-tab-group mat-align-tabs="center" animationDuration="1ms">
+          <mat-tab label="Agregar dirección">
+            <form class="row col-12" [formGroup]="formAddress">
+              <!-- Selects for state -->
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <mat-form-field appearance="outline">
+                  <mat-label>Lista de estados</mat-label>
+                  <mat-select formControlName="state" [(ngModel)]="state" (selectionChange)="changeMunicipalityAndCityes()">
+                    <mat-option *ngFor="let item of listStates" [value]="item.state"> {{ item.state }} </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Lista de municipios</mat-label>
+                  <mat-select formControlName="municipality" [(ngModel)]="municipality" [disabled]="!state" (selectionChange)="getSettlementsByService()">
+                    <mat-option *ngFor="let item of listMunicips" [value]="item.municipality"> {{ item.municipality }} </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Lista de ciudades</mat-label>
+                  <mat-select formControlName="city" [(ngModel)]="city" [disabled]="!state">
+                    <mat-option *ngFor="let item of listCitys" [value]="item.city"> {{ item.city }} </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <!-- Selects for settlements -->
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <mat-form-field appearance="outline">
+                  <mat-label>Lista de asentamientos</mat-label>
+                  <mat-select formControlName="settlement" [(ngModel)]="settlement" [disabled]="!municipality">
+                    <mat-option *ngFor="let item of listSettlems" [value]="item.settlement"> {{ item.settlement }} </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Lista de tipos de asentamientos</mat-label>
+                  <mat-select formControlName="settlement_type" [(ngModel)]="settlement_type" [disabled]="!municipality">
+                    <mat-option *ngFor="let item of listSettlemTypes" [value]="item.settlement_type"> {{ item.settlement_type }} </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Lista de zonas</mat-label>
+                  <mat-select formControlName="zone" [(ngModel)]="zone" [disabled]="!municipality">
+                    <mat-option *ngFor="let item of listZones" [value]="item.zone"> {{ item.zone }} </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-12">
+                <mat-form-field appearance="outline">
+                  <mat-label> Código postal </mat-label>
+                  <input matInput type="text" minlength="5" maxlength="5" name="postal_code" formControlName="postal_code">
+                </mat-form-field>
+              </div>
+              <hr>
+              <!-- Input for address -->
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <mat-form-field appearance="outline">
+                  <mat-label> C_STATE </mat-label>
+                  <input matInput type="text" name="c_state" formControlName="c_state">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label> C_CP </mat-label>
+                  <input matInput type="text" name="c_cp" formControlName="c_cp">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label> C_SETTLEMENT_TYPE </mat-label>
+                  <input matInput type="text" name="c_settlement_type" formControlName="c_settlement_type">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label> C_CVE_CIUDAD </mat-label>
+                  <input matInput type="text" name="c_cve_ciudad" formControlName="c_cve_ciudad">
+                </mat-form-field>
+              </div>
+              <!-- Input additionals -->
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <mat-form-field appearance="outline">
+                  <mat-label> D_CP </mat-label>
+                  <input matInput type="text" name="d_cp" formControlName="d_cp">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label> C_OFFICE </mat-label>
+                  <input matInput type="text" name="c_office" formControlName="c_office">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label> MUNCIPALITY_KEY </mat-label>
+                  <input matInput type="text" name="municipality_key" formControlName="municipality_key">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label> ID_ASENTA_CPCONS </mat-label>
+                  <input matInput type="text" name="id_asenta_cpcons" formControlName="id_asenta_cpcons">
+                </mat-form-field>
+              </div>
+              <!-- messages errors -->
+              <div class="row">
+                <div class="col-12">
+                  <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages" [innerHTML]="errorMessages"></small>
+                </div>
+              </div>
+              <div class="controls">
+                <button mat-button class="btn btn-secondary mx-2" (click)="onSubmit()" [disabled]="submittedForm"> Agregar dirección </button>
+              </div>
+            </form>
+          </mat-tab>
+          <mat-tab label="Importar direcciones">
+            <form class="row col-12">
+              <!-- Export -->
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <button class="btn mb-3 mat-button-base" *ngIf="!disabledBtnExcel" (click)="downloadFileAddressImport('template_import_address.xlsx')"> Descargar plantilla excel </button>
+                <a class="text-center" *ngIf="disabledBtnExcel">
+                  <mat-spinner class="text-center" diameter="40" strokeWidth="3"></mat-spinner>
+                </a>
+              </div>
+              <!-- Import -->
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label for="importAddressFile" class="col-12 mat-focus-indicator mat-stroked-button mat-button-base">Cargar plantilla excel</label>
+                      <input type="file" id="importAddressFile" (change)="importAddressFile($event)"
+                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" style="opacity: 0;" >
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                    <span class="" *ngIf="fileData"> {{ fileData.name }} </span>
+                  </div>
+                </div>
+              </div>
+              <!-- messages errors -->
+              <div class="row">
+                <div class="col-12">
+                  <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages" [innerHTML]="errorMessages"></small>
+                </div>
+              </div>
+              <div class="controls">
+                <button mat-button class="btn btn-secondary mx-2" (click)="importFileAddress()" [disabled]="!fileData || submittedForm"> Importar direcciones </button>
+              </div>
+            </form>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close> Cancelar </button>
+  </div>
+</div>

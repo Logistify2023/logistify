@@ -1,0 +1,127 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body">
+      <h3 class="titulo">
+        Actualizar
+      </h3>
+      <h4>
+        Completa los datos para actualizar
+      </h4>
+      <form [formGroup]="updateForm" class="form form-step" (ngSubmit)="onSubmit()">
+        <div class="pasos current" data-step="step-1">
+          <div class="row">
+            <div class="col-12 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Mercancía</mat-label>
+                <input type="text" matInput formControlName="name">
+                <ul class="autocomplete-items">
+                  <li *ngFor="let i of filteredOptions | async" (click)="selectedProductCreate(i)">
+                    {{ i.descripcion_producto }}
+                  </li>
+                </ul>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Clave de mercancía</mat-label>
+                <input matInput formControlName="key">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Descripción</mat-label>
+                <input matInput formControlName="description">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Existencia</mat-label>
+                <input matInput formControlName="existence">
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="row">
+                <div class="col-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Alto</mat-label>
+                    <input matInput formControlName="high">
+                  </mat-form-field>
+                </div>
+                <div class="col-6 ">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Ancho</mat-label>
+                    <input matInput formControlName="width">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 ">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Largo</mat-label>
+                    <input matInput formControlName="long">
+                  </mat-form-field>
+                </div>
+                <div class="col-6 ">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Peso</mat-label>
+                    <input matInput formControlName="weight">
+                  </mat-form-field>
+                </div>
+              </div>
+              <mat-form-field appearance="outline">
+                <mat-label>Tipo de mercancía</mat-label>
+                <mat-select formControlName="type">
+                  <mat-option value="SOBRE">SOBRE</mat-option>
+                  <mat-option value="PAQUETE">PAQUETE</mat-option>
+                  <mat-option value="PALLET">PALLET</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Categoría</mat-label>
+                <mat-select formControlName="category_id">
+                  <mat-option *ngFor="let item of listCategories" [value]="item.id">{{ item.category }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Marca</mat-label>
+                <mat-select formControlName="mark_id">
+                  <mat-option *ngFor="let item of listBrands" [value]="item.id">{{ item.brand }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Unidad de medida</mat-label>
+                <mat-select formControlName="measure_unit_id">
+                  <mat-option *ngFor="let item of listMeasureUnits" [value]="item.id">{{ item.measure_unit }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Ubicación</mat-label>
+                <mat-select formControlName="locations" multiple>
+                  <mat-option *ngFor="let item of listLocations" [value]="item.id">{{ item.location }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="form-check">
+                <mat-checkbox class="example-margin" formControlName="is_intern">¿Es interno?</mat-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages"
+              [innerHTML]="errorMessages"></small>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button type="submit" class="btn btn-secondary w-100 mt-3">
+            Actualizar
+          </button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cancelar
+    </button>
+  </div>
+</div>

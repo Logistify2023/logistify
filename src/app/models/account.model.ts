@@ -1,0 +1,18 @@
+export interface Account {
+  id: number,
+  description: string,
+  birth_date: Date,
+  home_phone: string,
+  link: string,
+  website: string,
+  facebook: string,
+  youtube: string,
+  instagram: string,
+  twiter: string,
+  linkendin: string,
+  sex: string,
+  status: string,
+  user_id: number,
+  created_at: string,
+  updated_at: string,
+}

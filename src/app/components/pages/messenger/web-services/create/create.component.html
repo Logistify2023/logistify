@@ -1,0 +1,113 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body">
+      <h3 class="titulo">
+        Nuevo
+      </h3>
+      <h4>
+        Completa los datos para agregar uno nuevo
+      </h4>
+      <form [formGroup]="createForm" class="form form-step" (ngSubmit)="onSubmit()">
+        <div class="pasos current" data-step="step-1">
+          <div class="row">
+            <div class="col-12 ">
+              <mat-form-field appearance="outline">
+                <mat-label>Servicio web</mat-label>
+                <input matInput formControlName="web_service">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Descripción</mat-label>
+                <input matInput type="text" formControlName="description">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Servicio</mat-label>
+                <input matInput formControlName="service">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Fecha</mat-label>
+                <input matInput type="date" formControlName="date">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Host</mat-label>
+                <input matInput formControlName="host">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Port</mat-label>
+                <input matInput formControlName="port">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>User</mat-label>
+                <input matInput formControlName="user">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Licencia</mat-label>
+                <input matInput formControlName="license">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>URL</mat-label>
+                <input matInput formControlName="url">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Mensajería</mat-label>
+                <mat-select formControlName="courier_id">
+                  <mat-option *ngFor="let item of listCourier" [value]="item.id">
+                    {{ item.courier }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <hr />
+              <h4>Payload</h4>
+              <div class="form-array-input" formArrayName="payload">
+                <div class="row mb-3">
+                  <div class="col-12 text-end">
+                    <span class="btn btn-small btn-primary btn-square" (click)="addPayloadParam()">
+                      <mat-icon aria-hidden="false" aria-label="Agregar nueva" fontIcon="add"></mat-icon> Add Parameter
+                    </span>
+                  </div>
+                </div>
+                <div class="row mb-2" *ngFor="let quantity of  payloadParam().controls; let i=index"
+                  [formGroupName]="i">
+                  <div class="col-4">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Name</mat-label>
+                      <input matInput formControlName="name">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Value</mat-label>
+                      <input matInput type="text" formControlName="value">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-delete btn-transparent" (click)="removePayloadParam(i)">
+                      <mat-icon aria-hidden="false" aria-label="Eliminar" fontIcon="delete_forever"></mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages"
+              [innerHTML]="errorMessages"></small>
+          </div>
+        </div>
+        <div class="controls">
+          <button type="submit" class="btn btn-secondary w-100 mt-3">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cancelar
+    </button>
+  </div>
+</div>

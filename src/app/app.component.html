@@ -1,0 +1,287 @@
+<mat-drawer-container>
+  <mat-drawer class="slideNavMenu" mode="side" [(opened)]="showMenuSidenav" *ngIf="isAuthenticated">
+    <nav class="menu">
+      <div class="menu-content">
+        <div class="menu-content_logo">
+          <img src="assets/img/logistify/logo-white.svg" alt="Logo Logistify" (click)="openSlideVar()">
+        </div>
+        <div class="menu-content_notifications">
+          <a [routerLink]="['/me-notifications']" class="mb-0" routerLinkActive="router-link-active">
+            <span [matBadge]="countNotifications" matBadgeOverlap="false"> Notificaciones </span>
+          </a>
+        </div>
+        <ul class="menu-content_nav">
+          <li>
+            <a [routerLink]="['/me-dashboard']" routerLinkActive="router-link-active"> Tablero </a>
+          </li>
+          <li>
+            <mat-accordion>
+              <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header> <a> Mis cotizaciones </a> </mat-expansion-panel-header>
+                <ul class="submenu-nav">
+                  <li>
+                    <a [routerLink]="['/me-quotes']" routerLinkActive="router-link-active"> Nacionales </a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/me-quotes-massive']" routerLinkActive="router-link-active"> Masivas </a>
+                  </li>
+                </ul>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </li>
+          <li>
+            <mat-accordion>
+              <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header> <a> Mis envíos </a> </mat-expansion-panel-header>
+                <ul class="submenu-nav">
+                  <li>
+                    <a [routerLink]="['/me-shipments']" routerLinkActive="router-link-active"> Nacionales </a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/me-shipments-massive']" routerLinkActive="router-link-active"> Masivos </a>
+                  </li>
+                </ul>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </li>
+          <li *appHaveAccess="'aside.track'">
+            <a [routerLink]="['/tracking']" routerLinkActive="router-link-active"> Rastreos </a>
+          </li>
+          <li *appHaveAccess="'aside.shipment'">
+            <mat-accordion>
+              <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header> <a> Envíos </a> </mat-expansion-panel-header>
+                <ul class="submenu-nav">
+                  <li *appHaveAccess="'claim.index'">
+                    <a [routerLink]="['/shipments/claims']" routerLinkActive="router-link-active"> Reclamaciones </a>
+                  </li>
+                  <li *appHaveAccess="'incidence-type.index'">
+                    <a [routerLink]="['/shipments/incidences-types']" routerLinkActive="router-link-active"> Tipo incidencias </a>
+                  </li>
+                  <li *appHaveAccess="'incidence.index'">
+                    <a [routerLink]="['/shipments/incidences']" routerLinkActive="router-link-active"> Incidencias </a>
+                  </li>
+                  <li *appHaveAccess="'event.index'">
+                    <a [routerLink]="['/shipments/events']" routerLinkActive="router-link-active"> Eventos </a>
+                  </li>
+                  <li *appHaveAccess="'delivery-time.index'">
+                    <a [routerLink]="['/shipments/delivery-times']" routerLinkActive="router-link-active"> Tiempo entregas </a>
+                  </li>
+                  <li *appHaveAccess="'state.index'">
+                    <a [routerLink]="['/shipments/status']" routerLinkActive="router-link-active"> Estados </a>
+                  </li>
+                  <li *appHaveAccess="'shipment.index'">
+                    <a [routerLink]="['/shipments/shipments']" routerLinkActive="router-link-active"> Envíos </a>
+                  </li>
+                  <!-- <li *appHaveAccess="'shipment.index'">
+                    <a [routerLink]="['/shipments/shipments-massive']" routerLinkActive="router-link-active"> Envíos masivos </a>
+                  </li> -->
+                  <li *appHaveAccess="'quote.index'">
+                    <a [routerLink]="['/shipments/quotes']" routerLinkActive="router-link-active"> Cotizaciones </a>
+                  </li>
+                  <!-- <li *appHaveAccess="'quote.index'">
+                    <a [routerLink]="['/shipments/quotes-massive']" routerLinkActive="router-link-active"> Cotizaciones masivas </a>
+                  </li> -->
+                </ul>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </li>
+          <li *appHaveAccess="'aside.user'">
+            <mat-accordion>
+              <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header> <a> Colaboradores </a> </mat-expansion-panel-header>
+                <ul class="submenu-nav">
+                  <li *appHaveAccess="'stall.index'">
+                    <a [routerLink]="['/user/stalls']" routerLinkActive="router-link-active"> Puestos </a>
+                  </li>
+                  <li *appHaveAccess="'area.index'">
+                    <a [routerLink]="['/user/areas']" routerLinkActive="router-link-active"> Áreas </a>
+                  </li>
+                  <li *appHaveAccess="'role.index'">
+                    <a [routerLink]="['/user/roles']" routerLinkActive="router-link-active"> Roles </a>
+                  </li>
+                  <li *appHaveAccess="'permission.index'">
+                    <a [routerLink]="['/user/permissions']" routerLinkActive="router-link-active"> Permisos </a>
+                  </li>
+                  <li *appHaveAccess="'classification.index'">
+                    <a [routerLink]="['/user/classifications']" routerLinkActive="router-link-active"> Clasificaciones </a>
+                  </li>
+                  <li *appHaveAccess="'user.index'">
+                    <a [routerLink]="['/users/users']" routerLinkActive="router-link-active"> Colaboradores </a>
+                  </li>
+                </ul>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </li>
+          <li *appHaveAccess="'aside.customer'">
+            <mat-accordion>
+              <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header> <a> Clientes </a> </mat-expansion-panel-header>
+                <ul class="submenu-nav">
+                  <li *appHaveAccess="'profile.index'">
+                    <a [routerLink]="['/clients/profiles-services']" routerLinkActive="router-link-active"> Perfiles venta </a>
+                  </li>
+                  <li *appHaveAccess="'customer-type.index'">
+                    <a [routerLink]="['/clients/types']" routerLinkActive="router-link-active"> Tipo clientes </a>
+                  </li>
+                  <li *appHaveAccess="'turns.index'">
+                    <a [routerLink]="['/clients/turns']" routerLinkActive="router-link-active"> Giros </a>
+                  </li>
+                  <li *appHaveAccess="'contact.index'">
+                    <a [routerLink]="['/clients/contacts']" routerLinkActive="router-link-active"> Contactos </a>
+                  </li>
+                  <li *appHaveAccess="'customer.index'">
+                    <a [routerLink]="['/clients/clients']" routerLinkActive="router-link-active"> Clientes </a>
+                  </li>
+                </ul>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </li>
+          <li *appHaveAccess="'aside.courier'">
+            <mat-accordion>
+              <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header> <a> Mensajerías </a> </mat-expansion-panel-header>
+                <ul class="submenu-nav">
+                  <li *appHaveAccess="'courier-type.index'">
+                    <a [routerLink]="['/couriers/courier-types']" routerLinkActive="router-link-active"> Tipo mensajerías </a>
+                  </li>
+                  <li *appHaveAccess="'web-service.index'">
+                    <a [routerLink]="['/couriers/web-services']" routerLinkActive="router-link-active"> Servicios web </a>
+                  </li>
+                  <li *appHaveAccess="'service-type.index'">
+                    <a [routerLink]="['/couriers/services-types']" routerLinkActive="router-link-active"> Tipo productos </a>
+                  </li>
+                  <li *appHaveAccess="'delivery-day.index'">
+                    <a [routerLink]="['/couriers/delivery-days']" routerLinkActive="router-link-active"> Día entregas </a>
+                  </li>
+                  <li *appHaveAccess="'type-price.index'">
+                    <a [routerLink]="['/couriers/type-prices']" routerLinkActive="router-link-active"> Tipo precios </a>
+                  </li>
+                  <li *appHaveAccess="'additional-charge-type.index'">
+                    <a [routerLink]="['/couriers/additional-charges-types']" routerLinkActive="router-link-active"> Grupo cargos adicionales </a>
+                  </li>
+                  <li *appHaveAccess="'additional-charge.index'">
+                    <a [routerLink]="['/couriers/additional-charges']" routerLinkActive="router-link-active"> Cargos adicionales </a>
+                  </li>
+                  <li *appHaveAccess="'service.index'">
+                    <a [routerLink]="['/couriers/services']" routerLinkActive="router-link-active"> Catálogo productos </a>
+                  </li>
+                  <li *appHaveAccess="'courier.index'">
+                    <a [routerLink]="['/couriers/couriers']" routerLinkActive="router-link-active"> Mensajerías </a>
+                  </li>
+                </ul>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </li>
+          <li *appHaveAccess="'aside.merchandise'">
+            <mat-accordion>
+              <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header> <a> Mercancías </a> </mat-expansion-panel-header>
+                <ul class="submenu-nav">
+                  <li *appHaveAccess="'product.index'">
+                    <a [routerLink]="['/products/products']" routerLinkActive="router-link-active"> Mercancías </a>
+                  </li>
+                  <li *appHaveAccess="'product.index'">
+                    <a [routerLink]="['/products/brands']" routerLinkActive="router-link-active"> Marcas </a>
+                  </li>
+                  <li *appHaveAccess="'product.index'">
+                    <a [routerLink]="['/products/categories']" routerLinkActive="router-link-active"> Categorías </a>
+                  </li>
+                  <li *appHaveAccess="'product.index'">
+                    <a [routerLink]="['/products/units']" routerLinkActive="router-link-active"> Unidad medidas </a>
+                  </li>
+                  <li *appHaveAccess="'product.index'">
+                    <a [routerLink]="['/products/locations']" routerLinkActive="router-link-active"> Ubicaciones </a>
+                  </li>
+                  <li *appHaveAccess="'product.index'">
+                    <a [routerLink]="['/products/losses']" routerLinkActive="router-link-active"> Perdidas </a>
+                  </li>
+                  <li *appHaveAccess="'product.index'">
+                    <a [routerLink]="['/products/providers']" routerLinkActive="router-link-active"> Provedores </a>
+                  </li>
+                  <li *appHaveAccess="'product.index'">
+                    <a [routerLink]="['/products/expenses']" routerLinkActive="router-link-active"> Gastos </a>
+                  </li>
+                  <li *appHaveAccess="'product.index'">
+                    <a [routerLink]="['/products/spendings']" routerLinkActive="router-link-active"> Tipo gastos </a>
+                  </li>
+                  <li *appHaveAccess="'product.index'">
+                    <a [routerLink]="['/products/supplies']" routerLinkActive="router-link-active"> Insumos </a>
+                  </li>
+                </ul>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </li>
+          <li *appHaveAccess="'aside.setting'">
+            <mat-accordion>
+              <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header> <a> Configuraciones </a> </mat-expansion-panel-header>
+                <ul class="submenu-nav">
+                  <li *appHaveAccess="'address.index'">
+                    <a [routerLink]="['/settings/address']" routerLinkActive="router-link-active"> Direcciones </a>
+                  </li>
+                  <li *appHaveAccess="'setting.index'">
+                    <a [routerLink]="['/settings/fuels']" routerLinkActive="router-link-active"> Producto combustibles </a>
+                  </li>
+                  <li *appHaveAccess="'setting.index'">
+                    <a [routerLink]="['/settings/groups']" routerLinkActive="router-link-active"> Producto grupos </a>
+                  </li>
+                  <li *appHaveAccess="'setting.index'">
+                    <a [routerLink]="['/settings/insurance']" routerLinkActive="router-link-active"> Cotizador seguros </a>
+                  </li>
+                </ul>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </li>
+          <li *appHaveAccess="'aside.audit'">
+            <mat-accordion>
+              <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header> <a> Auditorias </a> </mat-expansion-panel-header>
+                <ul class="submenu-nav">
+                  <li *appHaveAccess="'audit.customers'">
+                    <a [routerLink]="['/audit/customers']" routerLinkActive="router-link-active"> Auditar clientes </a>
+                  </li>
+                  <li *appHaveAccess="'audit.couriers'">
+                    <a [routerLink]="['/audit/couriers']" routerLinkActive="router-link-active"> Auditar mensajerías </a>
+                  </li>
+                </ul>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </li>
+          <li>
+            <a [routerLink]="['/me-profile']" routerLinkActive="router-link-active"> Mi perfil </a>
+          </li>
+        </ul>
+        <ul class="menu-content_footer">
+          <li> <a [routerLink]="['/terms']"> Términos y condiciones </a> </li>
+          <li class="mb-0">
+            <a (click)="signOut()">
+              <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon> Cerrar sesión
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar *ngIf="isAuthenticated">
+      <button mat-icon-button (click)="openSlideVar()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="d-md-none"> Logistify </span>
+      <span style="flex: 1 1 auto;"></span>
+      <div class="row">
+        <div class="col-6" style="text-align: left; margin-top: 0.5rem;"> <span>{{ userName }}</span> </div>
+        <div class="col-6" style="text-align: right;">
+          <a [routerLink]="['/me-profile']"> <img [src]="imgProfile" alt="#" class="logo"> </a>
+        </div>
+      </div>
+      <div>
+        <a class="mr-3" [routerLink]="['/me-notifications']">
+          <span [matBadge]="countNotifications" matBadgeOverlap="false"> <mat-icon aria-label="Notificaciones" fontIcon="notifications"></mat-icon> </span>
+        </a>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

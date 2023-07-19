@@ -1,0 +1,84 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body">
+      <h3 class="titulo"> Actualizar datos de colaborador </h3>
+      <div class="form form-step" (ngSubmit)="onSubmit()">
+        <div class="pasos current" data-step="step-1">
+          <div class="row">
+            <div class="col-12">
+              <form class="row" [formGroup]="updateFormGroup">
+                <div class="col-12 col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Nombre(s)</mat-label>
+                    <input matInput type="text" formControlName="name">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Primer apellido</mat-label>
+                    <input matInput type="text" formControlName="lastname">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Segundo apellido</mat-label>
+                    <input matInput type="text" formControlName="surname">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Nombre de usuario</mat-label>
+                    <input matInput type="text" formControlName="username">
+                  </mat-form-field>
+                  <p class="mb-3">
+                    Datos de contacto
+                  </p>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Correo electrónico</mat-label>
+                    <input matInput formControlName="email">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Teléfono</mat-label>
+                    <input matInput type="number" formControlName="phone">
+                  </mat-form-field>
+                </div>
+                <div class="col-12 col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Area</mat-label>
+                    <mat-select formControlName="area_id">
+                      <mat-option *ngFor="let item of listAreas" [value]="item.id">{{ item.area }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Puesto</mat-label>
+                    <mat-select formControlName="stall_id">
+                      <mat-option *ngFor="let item of listStalls" [value]="item.id">{{ item.stall }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Rol asignado</mat-label>
+                    <mat-select formControlName="role_id">
+                      <mat-option *ngFor="let item of listRoles" [value]="item.id">{{ item.rol }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Permisos</mat-label>
+                    <mat-select formControlName="permissions" multiple>
+                      <mat-option *ngFor="let item of listPermissions" [value]="item.id">{{item.permission}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-checkbox class="d-block text-start" formControlName="status">¿Está Disponible?</mat-checkbox>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages" [innerHTML]="errorMessages"></small>
+                  </div>
+                </div>
+                <div class="controls">
+                  <button mat-button class="btn btn-secondary mx-2" (click)="onSubmit()">Actualizar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cancelar
+    </button>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+.login {
+  .mat-form-field {
+    display: block;
+
+    &.mat-focused {
+      .mat-form-field-label {
+        color: white;
+      }
+    }
+
+    .mat-form-field-infix {
+      width: 100%;
+    }
+
+    &-appearance-outline {
+      .mat-form-field-outline {
+        color: white;
+      }
+
+      .mat-form-field-label {
+        color: white;
+        font-family: Lato, sans-serif;
+        font-weight: 400;
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+.mat-form-field {
+  display: block;
+  width: 100%;
+}
+
+.mat-form-input-group {
+  input[type="file"] {
+    width: 0px;
+    float: left;
+  }
+
+  label {
+    display: block;
+  }
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  top: calc(100% - 5px);
+  left: 0;
+  right: 0;
+  max-height: 200px;
+  text-align: left;
+  overflow-y: auto;
+
+  li {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+
+    &:hover {
+      background-color: #e9e9e9;
+    }
+  }
+}
+
+/* when navigating through the items using the arrow keys */
+.autocomplete-active {
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}

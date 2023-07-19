@@ -1,0 +1,140 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body">
+      <h3 class="titulo">
+        Actualizar
+      </h3>
+      <h4>
+        Completa los datos para actualizar
+      </h4>
+      <form [formGroup]="updateForm" class="form form-step" (ngSubmit)="onSubmit()">
+        <div class="pasos current" data-step="step-1">
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Razón social</mat-label>
+                <input matInput type="text" placeholder="" formControlName="business_name"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('business_name')?.errors }">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input matInput type="text" placeholder="" formControlName="name"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('name')?.errors }">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Segundo nombre</mat-label>
+                <input matInput type="text" placeholder="" formControlName="surname"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('surname')?.errors }">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Apellido</mat-label>
+                <input matInput type="text" placeholder="" formControlName="lastname"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('lastname')?.errors }">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Télefono</mat-label>
+                <input matInput type="text" placeholder="" formControlName="phone"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('phone')?.errors }">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="text" placeholder="" formControlName="email"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('email')?.errors }">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Ubicación</mat-label>
+                <input matInput type="text" placeholder="" formControlName="location"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('location')?.errors }">
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>C.P.</mat-label>
+                <input matInput type="text" placeholder="" formControlName="postal_code" (change)="validateCPUpdate()"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('postal_code')?.errors }">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Estado</mat-label>
+                <mat-select>
+                  <option *ngFor="let item of listStates" [value]="item.state">
+                    {{ item.state }}
+                  </option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Ciudad</mat-label>
+                <mat-select>
+
+                  <option *ngFor=" let item of listCities" [value]="item.city">
+                    {{ item.city }}
+                  </option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Municipio</mat-label>
+                <mat-select>
+
+                  <option *ngFor="let item of listMunicipalities" [value]="item.municipality">
+                    {{ item.municipality }}
+                  </option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Colonia</mat-label>
+                <mat-select formControlName="suburb"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('suburb')?.errors }">
+                  <option *ngFor="let item of listSettlement" [value]="item.settlement">
+                    {{ item.settlement }}
+                  </option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Calle</mat-label>
+                <input matInput type="text" placeholder="" formControlName="street"
+                  [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('street')?.errors }">
+              </mat-form-field>
+              <div class="row">
+                <div class="col-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>No. Ext.</mat-label>
+                    <input matInput type="text" placeholder="" formControlName="outdoor_number"
+                      [ngClass]="{ 'is-invalid': submittedForm && updateForm.get('outdoor_number')?.errors }">
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>No. Int.</mat-label>
+                    <input matInput type="text" placeholder="" formControlName="interior_number">
+                  </mat-form-field>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="true" id="can_enable_u"
+                    formControlName="status">
+                  <label class="form-check-label" for="can_enable_u">
+                    ¿Está Disponible?
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages"
+              [innerHTML]="errorMessages"></small>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button type="submit" class="btn btn-secondary w-100 mt-3">
+            Actualizar
+          </button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cancelar
+    </button>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<main class="main-content">
+  <div class="container-fluid header_pages">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <h2>Mis notificaciones</h2>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container-fluid logistify-table tableUsers mt-3">
+    <div class="row" *ngIf="!loanding">
+      <div class="col-12 p-md-4 logistify-table">
+        <mat-tab-group>
+          <mat-tab label="Últimas notificaciones">
+            <div *ngIf="listNotificationsUnread.length > 0">
+              <div class="col-12 text-end">
+                <button class="btn btn-link" (click)="markReadAllUnread()"><small>Marcar todas como leídas</small></button>
+              </div>
+              <div class="list-group">
+                <button class="list-group-item list-group-item-action mb-0" *ngFor="let item of listNotificationsUnread"
+                  (click)="markRead(item.id)">
+                  <strong class="d-block">{{ item.data.message }}</strong>
+                  <p style="overflow: hidden;">{{ item.data.description }}</p>
+                  <span class="text-muted d-flex justify-content-end">Creado: {{ item.created_at | date:'medium' }}</span>
+                </button>
+              </div>
+            </div>
+            <div *ngIf="listNotificationsUnread.length == 0" class="d-flex justify-content-center flex-wrap mt-3">
+              <strong>No hay notificaciones recientes para mostrar.</strong>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="Notificaciones antiguas">
+            <div *ngIf="listNotificationsRead.length > 0">
+              <div class="list-group">
+                <button class="list-group-item list-group-item-action mb-0" *ngFor="let item of listNotificationsRead">
+                  <strong class="d-block">{{ item.data.message }}</strong>
+                  <p>{{ item.data.description }}</p>
+                  <span class="text-muted d-flex justify-content-end">Leída: {{ item.read_at | date:'medium' }}</span>
+                </button>
+              </div>
+            </div>
+            <div *ngIf="listNotificationsRead.length == 0" class="d-flex justify-content-center flex-wrap mt-3">
+              <strong>No hay notificaciones antiguas para mostrar.</strong>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+    <div class="loading text-center" *ngIf="loanding">
+      <img width="45%" height="45%" src="assets/img/loader.svg">
+    </div>
+  </div>
+</main>

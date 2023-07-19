@@ -1,0 +1,160 @@
+<main class="main-content">
+  <div class="container-fluid header_pages">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <h2>Listado de direcciones <span *ngIf="dataDeleted">eliminadas </span></h2>
+      </div>
+      <!-- <div class="col-lg-4 col-md-4 col-sm-12 text-md-end" *appHaveAccess="'admin.address.index'">
+        <button class="btn btn-secondary" (click)="changeDeleteData()" *ngIf="!dataDeleted"> Direcciones eliminadas </button>
+        <button class="btn btn-secondary" (click)="changeDeleteData()" *ngIf="dataDeleted"> Listado direcciones </button>
+      </div> -->
+    </div>
+  </div>
+  <hr>
+  <!-- Carga de data -->
+  <div class="container-fluid logistify-table tableUsers mt-3">
+    <!-- Fila para los filtros -->
+    <div class="row">
+      <div class="col-lg-7 col-md-7 col-sm-12">
+        <form #searchAddressForm="ngForm" class="form">
+          <div class="row">
+            <h3 class="text-center">Obtener por filtro</h3>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Lista de estados</mat-label>
+                <mat-select name="state" [(ngModel)]="state" required (selectionChange)="getMuncipalityByService()">
+                  <mat-option *ngFor="let item of listStates" [value]="item.state"> {{ item.state }} </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Lista de municipios</mat-label>
+                <mat-select name="municipality" [(ngModel)]="municipality" required (selectionChange)="getSettlementsByService()" [disabled]="!state">
+                  <mat-option *ngFor="let item of listMunicips" [value]="item.municipality"> {{ item.municipality }} </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <button class="btn btn-success text-center" (click)="getAddressByFilters()" [disabled]="!searchAddressForm.form.valid">
+                Obtener direcciones
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Filter by CP -->
+      <div class="col-lg-5 col-md-5 col-sm-12">
+        <form #searchCpForm="ngForm" class="form">
+          <div class="row">
+            <h3 class="text-center">Obtener por código postal</h3>
+            <div class="col-lg-8 col-md-8 col-sm-12">
+              <div class="input-group">
+                <mat-form-field appearance="outline">
+                  <mat-label> Código postal </mat-label>
+                  <input matInput type="text" minlength="5" maxlength="5" [(ngModel)]="postal_code" name="postal_code" required min="1">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <button class="btn btn-info text-center" (click)="getSettlementsByPostalCode()" [disabled]="!searchCpForm.form.valid">
+                Obtener direcciones
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <!-- Data en table -->
+    <div class="row" *ngIf="showTable">
+      <div class="col-12 p-md-4 logistify-table" *ngIf="!loading">
+        <div class="row mb-3">
+          <div class="col-lg-8 col-md-8 col-sm-12 form">
+            <div class="input-group">
+              <mat-form-field appearance="outline">
+                <mat-label>Buscar una dirección</mat-label>
+                <input matInput (keyup)="applyFilter($event)">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+          <div *appHaveAccess="'address.store'" class="col-lg-4 col-md-4 col-sm-12 text-end text-md-start">
+            <button class="btn btn-primary w-100" (click)="openModalCreate()">
+              <mat-icon aria-hidden="false" aria-label="Nueva cotización" fontIcon="add"></mat-icon> Agregar dirección
+            </button>
+          </div>
+        </div>
+        <div class="mat-elevation-z8">
+          <table mat-table matSort [dataSource]="dataSource">
+            <ng-container matColumnDef="postal_code">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Código postal</th>
+              <td mat-cell *matCellDef="let element"> {{ element.postal_code }} </td>
+            </ng-container>
+            <ng-container matColumnDef="settlement">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Asentamiento</th>
+              <td mat-cell *matCellDef="let element"> {{ element.settlement }} </td>
+            </ng-container>
+            <ng-container matColumnDef="settlement_type">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
+              <td mat-cell *matCellDef="let element"> {{ element.settlement_type }} </td>
+            </ng-container>
+            <ng-container matColumnDef="municipality">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Municipio</th>
+              <td mat-cell *matCellDef="let element"> {{ element.municipality }} </td>
+            </ng-container>
+            <ng-container matColumnDef="city">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Ciudad</th>
+              <td mat-cell *matCellDef="let element"> {{ element.city }} </td>
+            </ng-container>
+            <ng-container matColumnDef="zone">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Zona</th>
+              <td mat-cell *matCellDef="let element"> {{ element.zone }} </td>
+            </ng-container>
+            <ng-container matColumnDef="estado">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+              <td mat-cell *matCellDef="let element"> {{ element.status }} </td>
+            </ng-container>
+            <ng-container *appHaveAccess="'address.show'" matColumnDef="details">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon fontIcon="info" aria-label="Detalle dirección" (click)="openModalDetails(element.id)"></mat-icon>
+              </td>
+            </ng-container>
+            <ng-container *appHaveAccess="'address.update'" matColumnDef="update">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon fontIcon="edit" aria-label="Actualizar dirección" (click)="openModalUpdate(element.id)"></mat-icon>
+              </td>
+            </ng-container>
+            <ng-container *appHaveAccess="'address.destroy'" matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon fontIcon="delete" aria-label="Eliminar dirección" (click)="openModalDelete(element.id)"></mat-icon>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell text-center" [colSpan]="displayedColumns.length">
+                <strong class="p-2"> {{ messageEmpty }} </strong>
+              </td>
+            </tr>
+          </table>
+          <!-- Paginator -->
+          <mat-paginator
+            showFirstLastButtons
+            color="warn"
+            [length]="totalResult"
+            [pageSize]="itemPerPage"
+            [pageSizeOptions]="pageSizeOptions">
+          </mat-paginator>
+        </div>
+      </div>
+      <!-- Loanding -->
+      <div class="loading" *ngIf="loading">
+        <img width="65%" height="65%" src="assets/img/loader.svg">
+      </div>
+    </div>
+  </div>
+</main>

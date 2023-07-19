@@ -1,0 +1,313 @@
+<div class="modal-general">
+  <div class="modal-content modal-dialog">
+    <mat-dialog-content class="mat-typography modal-body">
+      <h3 class="titulo">
+        Actualizar cotización
+      </h3>
+      <form [formGroup]="updateForm" class="row form-step" (ngSubmit)="onSubmit()" *ngIf="!loading">
+        <div class="pasos current" data-step="step-1">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Nombre cliente</mat-label>
+                <input matInput type="text" formControlName="id_customer" readonly>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Fecha de envío</mat-label>
+                <input matInput type="date" formControlName="ship_date">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="quote-origin col-6">
+              <div class="col-2 mb-3">
+                <mat-checkbox class="d-block text-start" [checked]="isCheckedOriginCheck"  (change)="checkBoxAddressOrigin()">Otra dirección</mat-checkbox>
+              </div>
+              <mat-form-field appearance="outline" *ngIf="isCheckedOriginCheck">
+                <mat-label>Código postal origen</mat-label>
+                <input matInput formControlName="origin_postal_code" (change)="validateCPCreate_Origin()">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+              <mat-form-field appearance="outline" *ngIf="!isCheckedOriginCheck">
+                <mat-label>Sucursal</mat-label>
+                <mat-select formControlName="branch_office_origin" [(ngModel)]="valueSelectPostalCodeOrigin" (selectionChange)="selectPostalCodeOrigin()">
+                  <mat-option *ngFor="let item of listAddressUser" [value]="item.id">
+                    {{ item.contact.branch_office}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline"  *ngIf="!isCheckedOriginCheck">
+                <mat-label>Código postal origen</mat-label>
+                <input matInput formControlName="origin_postal_code" readonly>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Estado</mat-label>
+                <input matInput type="text" formControlName="origin_state" readonly>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Ciudad</mat-label>
+                <input matInput type="text" formControlName="origin_city" readonly>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Municipio</mat-label>
+                <input matInput type="text" formControlName="origin_municipality" readonly>
+              </mat-form-field>
+              <mat-form-field appearance="outline" *ngIf="isCheckedOriginCheck">
+                <mat-label>Colonia</mat-label>
+                <mat-select formControlName="origin_settlement" (selectionChange)="selectSettlementOrigin()">
+                  <mat-option *ngFor="let item of listSettlement_Origin" [value]="item.id">
+                    {{ item.settlement }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline" *ngIf="!isCheckedOriginCheck">
+                <mat-label>Colonia</mat-label>
+                <input matInput type="text" formControlName="origin_settlement" readonly>
+              </mat-form-field>
+            </div>
+            <div class="quote-destin col-6">
+              <div class="col-2 mb-3">
+                <mat-checkbox class="d-block text-start" [checked]="isCheckedDestinCheck" (change)="checkBoxAddressDestin()">Otra dirección</mat-checkbox>
+              </div>
+              <mat-form-field appearance="outline" *ngIf="isCheckedDestinCheck">
+                <mat-label>Código postal destino</mat-label>
+                <input matInput formControlName="destin_postal_code" (change)="validateCPCreate_Destiny()">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+              <mat-form-field appearance="outline" *ngIf="!isCheckedDestinCheck">
+                <mat-label>Sucursal</mat-label>
+                <mat-select formControlName="branch_office_destin" [(ngModel)]="valueSelectPostalCodeDestin" (selectionChange)="selectPostalCodeDestin()">
+                  <mat-option *ngFor="let item of listAddressUser" [value]="item.id">
+                    {{ item.contact.branch_office }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline"  *ngIf="!isCheckedDestinCheck">
+                <mat-label>Código postal origen</mat-label>
+                <input matInput formControlName="destin_postal_code" readonly>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Estado</mat-label>
+                <input matInput type="text" formControlName="destin_state" readonly>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Ciudad</mat-label>
+                <input matInput type="text" formControlName="destin_city" readonly>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Municipio</mat-label>
+                <input matInput type="text" formControlName="destin_municipality" readonly>
+              </mat-form-field>
+              <mat-form-field appearance="outline" *ngIf="isCheckedDestinCheck">
+                <mat-label>Colonia</mat-label>
+                <mat-select formControlName="destin_settlement" (selectionChange)="selectSettlementOrigin()">
+                  <mat-option *ngFor="let item of listSettlement_Origin" [value]="item.id">
+                    {{ item.settlement }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline" *ngIf="!isCheckedDestinCheck">
+                <mat-label>Colonia</mat-label>
+                <input matInput type="text" formControlName="destin_settlement" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- <div class="col-12">
+            <h4 class="text-start">Servicios adicionales</h4>
+            <div class="row">
+              <div class="col-4 mb-3" *ngFor="let charge of listAdditionalChargesByAuto">
+                <mat-checkbox class="d-block text-start" (change)="checkAdditionalCharge(charge)">{{ charge.addition_charge}}</mat-checkbox>
+              </div>
+            </div>
+            <div class="row" [hidden]="hiddenInputValueDeclared">
+              <mat-form-field appearance="outline">
+                <mat-label>Monto a asegurar</mat-label>
+                <input matInput type="number" formControlName="insurance">
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field appearance="outline">
+                <mat-label>Cargos adicionales</mat-label>
+                <mat-select formControlName="additionals" multiple>
+                  <mat-option *ngFor="let item of listAdditionalChargesByUser" [value]="item.id">
+                    {{ item.addition_charge }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-12">
+            <h4 class="text-start">Paquetes y mercancías.</h4>
+            <div class="row col-4">
+              <div class="col-6">
+                <div class="form-check">
+                  <mat-checkbox class="d-block text-start" #checkboxPackage>Paquetes</mat-checkbox>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-check">
+                  <mat-checkbox class="d-block text-start" #checkboxProducts >Mercancías</mat-checkbox>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-array-input" formArrayName="packages" [hidden]="!checkboxPackage.checked">
+                <div class="row mb-3">
+                  <div class="col-12 text-end">
+                    <span class="btn btn-small btn-primary btn-square" (click)="addPackagesParam()">
+                      <mat-icon aria-hidden="false" aria-label="Agregar nueva" fontIcon="add"></mat-icon> Agregar paquete
+                    </span>
+                  </div>
+                </div>
+                <div class="row mb-2" *ngFor="let quantity of  packagesParam().controls; let i=index"
+                  [formGroupName]="i">
+                  <div class="row col-10">
+                    <div class="col-4">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Tipo</mat-label>
+                        <mat-select formControlName="type">
+                          <mat-option  value="PAQUETE">
+                            PAQUETE
+                          </mat-option>
+                          <mat-option  value="SOBRE">
+                            SOBRE
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-2">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Largo</mat-label>
+                        <input matInput type="number" formControlName="long" min="0">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-2">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Ancho</mat-label>
+                        <input matInput type="number" formControlName="width" min="0">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-2">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Alto</mat-label>
+                        <input matInput type="number" formControlName="high" min="0">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-2">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Peso</mat-label>
+                        <input matInput type="number" formControlName="weight" min="0">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row col-10">
+                    <div class="col-2">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Cantidad</mat-label>
+                        <input matInput type="number" formControlName="quantity" min="1">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-2">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Campaña</mat-label>
+                        <input matInput type="text" formControlName="campaign">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-2">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Centro de costos</mat-label>
+                        <input matInput type="text" formControlName="cost_center">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Contenido</mat-label>
+                        <input matInput type="text" formControlName="content">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Descripción</mat-label>
+                        <input matInput type="text" formControlName="description">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-2 text-end">
+                    <button class="btn btn-delete btn-transparent" (click)="removePackagesParam(i)">
+                      <mat-icon aria-hidden="false" aria-label="Eliminar" fontIcon="delete_forever"></mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <hr [hidden]="!checkboxPackage.checked">
+              <div class="form-array-input" formArrayName="products" [hidden]="!checkboxProducts.checked">
+                <span class="text-danger" *ngIf="listProducts.length == 0"><h4>No hay mercancías disponibles</h4></span>
+                <div class="row mb-3" *ngIf="listProducts.length > 0">
+                  <div class="col-12 text-end">
+                    <span class="btn btn-small btn-primary btn-square" (click)="addProductsParam()">
+                      <mat-icon aria-hidden="false" aria-label="Agregar nueva" fontIcon="add"></mat-icon> Agregar mercancía
+                    </span>
+                  </div>
+                </div>
+                <div class="row mb-2" *ngFor="let quantity of  productsParam().controls; let i=index"
+                  [formGroupName]="i">
+                  <div class="col-2">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Cantidad</mat-label>
+                      <input matInput type="number" formControlName="quantity" min="0">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-4">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Mercancía</mat-label>
+                      <mat-select formControlName="id">
+                        <mat-option *ngFor="let item of listProducts" [value]="item.id">
+                          {{ item.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-2">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Campaña</mat-label>
+                      <input matInput type="campaign" formControlName="quantity" min="1">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-2">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Centro de costos</mat-label>
+                      <input matInput type="cost_center" formControlName="quantity" min="1">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-2 text-end">
+                    <button class="btn btn-delete btn-transparent" (click)="removeProductsParam(i)">
+                      <mat-icon aria-hidden="false" aria-label="Eliminar" fontIcon="delete_forever"></mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <small class="error d-block text-start invalid-feedback mt-2" *ngIf="errorMessages"
+              [innerHTML]="errorMessages"></small>
+          </div>
+        </div>
+        <div class="controls">
+          <button type="submit" class="btn btn-secondary w-100 mt-3"> Generar guía </button>
+          <!-- <button type="submit" class="btn btn-secondary w-100 mt-3"> Actualizar </button> -->
+        </div>
+      </form>
+      <div class="loading text-center" *ngIf="loading">
+        <img src="assets/img/loader.svg">
+      </div>
+    </mat-dialog-content>
+    <button class="btn btn-morado btn-cuadrado" type="button" mat-dialog-close>
+      Cancelar
+    </button>
+  </div>
+</div>
